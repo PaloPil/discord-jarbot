@@ -4,6 +4,6 @@ module.exports = {
   name: Events.ClientReady,
   once: true,
   async execute(client) {
-    console.log(`${client.user.tag} lambda is ready!`);
+    console.log(`Client connected as ${client.user.tag}!`);
   },
 };

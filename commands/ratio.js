@@ -26,7 +26,7 @@ module.exports = {
     try {
       messageId = interaction.channel.messages.resolveId(messageId);
     } catch (error) {
-      return interaction.reply("L'ID ou l'URL est incorrecte.");
+      return interaction.reply("**L'ID ou l'URL est incorrecte.**");
     }
 
     const targetMessage = await interaction.channel.messages.fetch(messageId);
@@ -37,7 +37,7 @@ module.exports = {
         .has(PermissionsBitField.Flags.SendMessages)
     ) {
       return interaction.editReply(
-        "Vous n'avez pas la permission d'envoyer des messages dans ce salon."
+        "**Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
       );
     }
 
@@ -50,7 +50,7 @@ module.exports = {
         .has(PermissionsBitField.Flags.AddReactions)
     ) {
       return interaction.editReply(
-        "Vous n'avez pas la permission d'ajouter des réactions à ce message."
+        "**Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
       );
     }
 
@@ -61,7 +61,7 @@ module.exports = {
     await targetMessage.react("🇴");
 
     await interaction.editReply(
-      `Le [membre](${targetMessage.url}) s'est fait **RATIO** !$`
+      `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
     );
     console.log(targetMessage.channel.permissionsFor(interaction.user));
   },

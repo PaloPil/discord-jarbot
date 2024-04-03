@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const BlaguesAPI = require("blagues-api");
-const config = require("../config.json");
-const blagues = new BlaguesAPI(config.blagueToken);
+const blagues = new BlaguesAPI(process.env.BLAGUETOKEN);
 
 /* En réalité les types de blagues sont : 
     global, dev, dark, limit, beauf, blondes
@@ -37,7 +36,7 @@ module.exports = {
       }
 
       const joke = await fetchBlague(
-        config.blagueToken,
+        process.env.BLAGUETOKEN,
         category,
         excludedCategories
       );

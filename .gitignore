@@ -134,3 +134,9 @@ package-lock.json
 
 # Private files
 config.json
+
+# Docker files (Just testing for now, it's not sure to be added)
+compose.yaml
+Dockerfile
+README.Docker.md
+.dockerignore

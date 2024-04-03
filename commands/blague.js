@@ -21,10 +21,10 @@ module.exports = {
         .setDescription("Type de blague")
         .setRequired(true)
         .addChoices(
-          { name: "Normale", value: "global" },
-          { name: "Développeur", value: "dev" },
-          { name: "Beauf", value: "beauf" },
-          { name: "Blonde", value: "blondes" }
+          ...typeBlagues.map((type) => ({
+            name: type.charAt(0).toUpperCase() + type.slice(1),
+            value: type,
+          }))
         );
     }),
   async execute(interaction) {
@@ -43,8 +43,8 @@ module.exports = {
       );
 
       const embed = {
-        title: joke.joke,
-        description: `||${joke.answer}||`,
+        title: `**Réponse :** \`${joke.answer}\``,
+        description: `||${joke.joke}||`,
         color: 3066993,
         footer: {
           text: interaction.user.username,

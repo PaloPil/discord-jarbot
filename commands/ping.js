@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ping")
-    .setDescription("Replies with Pong!"),
+    .setDescription("Donne le ping du bot"),
   async execute(interaction) {
     await interaction.deferReply();
 
@@ -13,7 +13,7 @@ module.exports = {
 
     const embed = {
       title: "Pong!",
-      description: `The ping is ${ping}ms`,
+      description: `Le ping est de ${ping}ms`,
       color: 12246104,
       footer: {
         text: interaction.user.username,

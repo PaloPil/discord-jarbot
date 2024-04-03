@@ -1,3 +1,6 @@
+# Exemple de commande
+
+```js
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const path = require("node:path");
 
@@ -21,3 +24,4 @@ module.exports = {
     console.log(`Arg1: ${arg1}`);
   },
 };
+```

@@ -5,9 +5,12 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^14.14.1"
+    "blagues-api": "^2.1.1",
+    "discord.js": "^14.14.1",
+    "nodemon": "^3.1.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "test": "node index.js",
+    "dev": "nodemon index.js"
   }
 }

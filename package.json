@@ -12,7 +12,6 @@
     "nodemon": "^3.1.0"
   },
   "scripts": {
-    "test": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node index.js"
   }
 }

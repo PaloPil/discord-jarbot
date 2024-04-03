@@ -63,6 +63,5 @@ module.exports = {
     await interaction.editReply(
       `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
     );
-    console.log(targetMessage.channel.permissionsFor(interaction.user));
   },
 };

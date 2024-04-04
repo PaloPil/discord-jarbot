@@ -17,6 +17,9 @@ dependencies:
   dotenv:
     specifier: ^16.4.5
     version: 16.4.5
+  proto-tools:
+    specifier: ^1.3.0
+    version: 1.3.0
 
 packages:
 
@@ -202,6 +205,10 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
+    dev: false
+
+  /proto-tools@1.3.0:
+    resolution: {integrity: sha512-Ho/bYOJvsHuaa7XpfmI7D2qwAe8qy+q2pvfQs6dsNih0UNDKygJty6vD+CfM/PlNjsYNHw9Rg6bG2IVWznx3Hg==}
     dev: false
 
   /tr46@0.0.3:

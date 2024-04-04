@@ -27,4 +27,5 @@ module.exports = {
 
     await interaction.reply(`**Voici votre nombre aléatoire :** \`${num}\``);
   },
+  inRandomCommand: true
 };

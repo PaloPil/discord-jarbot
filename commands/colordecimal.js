@@ -3,7 +3,9 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("colordecimal")
-    .setDescription("Convertis un code couleur hexadécimal en décimal")
+    .setDescription(
+      "Convertis un code couleur hexadécimal en décimal ou donne un aléatoire"
+    )
     .addStringOption((option) =>
       option
         .setName("hexcolor")
@@ -22,7 +24,7 @@ module.exports = {
 
     const embed = {
       title: "Voici le résultat !",
-      description: `Le code décimal : ${decimalColor}`,
+      description: `**Code héxadecimal :** \`${hexColor}\`\n➡️ **Le code décimal :** \`${decimalColor}\``,
       color: decimalColor,
       footer: {
         text: interaction.user.username,

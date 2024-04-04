@@ -64,4 +64,5 @@ module.exports = {
       `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
     );
   },
+  inRandomCommand: false
 };

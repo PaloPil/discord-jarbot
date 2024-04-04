@@ -42,4 +42,5 @@ module.exports = {
 
     mention(nombre);
   },
+  inRandomCommand: true
 };

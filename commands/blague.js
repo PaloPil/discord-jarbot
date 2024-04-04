@@ -59,6 +59,7 @@ module.exports = {
       );
     }
   },
+  inRandomCommand: false
 };
 
 async function fetchBlague(token, category, excludedCategories) {

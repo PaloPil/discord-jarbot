@@ -18,7 +18,7 @@ module.exports = {
       return option
         .setName("category")
         .setDescription("Type de blague")
-        .setRequired(true)
+        .setRequired(false)
         .addChoices(
           ...typeBlagues.map((type) => ({
             name: type.charAt(0).toUpperCase() + type.slice(1),
@@ -27,7 +27,7 @@ module.exports = {
         );
     }),
   async execute(interaction) {
-    const selectedType = interaction.options.getString("category");
+    const selectedType = interaction.options.getString("category") ?? typeBlagues.random();
 
     try {
       const category = blagues.categories[selectedType.toUpperCase()];
@@ -59,7 +59,7 @@ module.exports = {
       );
     }
   },
-  inRandomCommand: false
+  inRandomCommand: true
 };
 
 async function fetchBlague(token, category, excludedCategories) {

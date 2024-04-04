@@ -6,7 +6,7 @@ module.exports = {
   async execute(client) {
     client.user.setPresence({
       activities: [
-        { name: "Just Another Random Bot", type: ActivityType.Competing },
+        { name: "Just Another Random Bot", type: ActivityType.PLAYING },
       ],
       status: "idle",
     });

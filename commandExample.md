@@ -23,5 +23,6 @@ module.exports = {
     let arg1 = interaction.options.getString("arg1") || 100; // 100 is the default value
     console.log(`Arg1: ${arg1}`);
   },
+    inRandomCommand: false
 };
 ```

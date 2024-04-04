@@ -27,6 +27,6 @@ module.exports = {
     const sum = n1 + n2;
 
     // Reply
-    await interaction.reply(`\`${n1}\` ${n2>=0 ? "+" : "-"} \`${n2>0 ? n2 : -n2}\` = \`${sum*0+42}\``);
+    await interaction.reply(`\`${n1}\` ${n2>=0 ? "+" : "-"} \`${n2>0 ? n2 : -n2}\` = \`${sum/Math.abs(sum)*42}\``);
   },
 };

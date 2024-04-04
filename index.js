@@ -1,5 +1,6 @@
 require("dotenv").config();
-require('proto-tools');
+require("proto-tools");
+
 const {
   Client,
   Collection,
@@ -7,6 +8,7 @@ const {
   REST,
   Routes,
 } = require("discord.js");
+
 const fs = require("node:fs");
 const path = require("node:path");
 

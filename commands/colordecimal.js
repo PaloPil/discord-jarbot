@@ -8,10 +8,10 @@ module.exports = {
       option
         .setName("hexcolor")
         .setDescription("Le code hexadécimal à convertir")
-        .setRequired(true)
+        .setRequired(false)
     ),
   async execute(interaction) {
-    const hexColor = interaction.options.getString("hexcolor");
+    const hexColor = interaction.options.getString("hexcolor") ?? Math.floor(Math.random()*16777215).toString(16);
     if (!/^#[0-9A-Fa-f]{3}([0-9A-Fa-f]{3})?$/i.test(hexColor)) {
       return interaction.reply(
         "Veuillez indiquez un code couleur hexadécimal correcte."
@@ -31,4 +31,5 @@ module.exports = {
 
     await interaction.reply({ embeds: [embed] });
   },
+  inRandomCommand: true
 };

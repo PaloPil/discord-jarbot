@@ -1,3 +1,4 @@
+require("dotenv").config();
 const {
   Client,
   Collection,
@@ -11,8 +12,6 @@ const path = require("node:path");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
-
-const config = require("./config.json");
 
 const commands = [];
 const commandsPath = path.join(__dirname, "commands");
@@ -48,16 +47,19 @@ for (const file of eventFiles) {
   }
 }
 
-const rest = new REST().setToken(config.token);
+const rest = new REST().setToken(process.env.TOKEN);
 (async () => {
   try {
     console.log(
       `Started refreshing ${commands.length} application (/) commands.`
     );
 
-    const data = await rest.put(Routes.applicationCommands(config.clientId), {
-      body: commands,
-    });
+    const data = await rest.put(
+      Routes.applicationCommands(process.env.CLIENTID),
+      {
+        body: commands,
+      }
+    );
 
     console.log(
       `Successfully reloaded ${data.length} application (/) commands.`
@@ -67,4 +69,4 @@ const rest = new REST().setToken(config.token);
   }
 })();
 
-client.login(config.token);
+client.login(process.env.TOKEN);

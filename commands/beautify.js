@@ -22,13 +22,13 @@ module.exports = {
 
       const image = await getImageFromURL(avatarURL);
 
-      const bocal = await Jimp.read("./images/anotherjar.png");
+      const jar = await Jimp.read("./images/anotherjar.png");
 
-      image.resize(bocal.bitmap.width, bocal.bitmap.height);
+      image.resize(jar.bitmap.width, jar.bitmap.height);
 
-      bocal.mask(image, 0, 0);
+      jar.mask(image, 0, 0);
 
-      const finalBuffer = await bocal.getBufferAsync(Jimp.MIME_PNG);
+      const finalBuffer = await jar.getBufferAsync(Jimp.MIME_PNG);
       const fileName = `jared_${interaction.user.id}.png`;
 
       await fs.writeFile(fileName, finalBuffer);

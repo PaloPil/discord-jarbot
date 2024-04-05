@@ -1,14 +1,37 @@
 const { SlashCommandBuilder } = require("discord.js");
 const Jimp = require("jimp");
-const axios = require("axios");
-const fs = require("fs").promises;
-const fsbasic = require("fs");
-const webp = require("webp-converter");
+const fs = require("fs");
+const path = require("path");
+const sharp = require("sharp");
+const https = require("https");
+const { v4: uuidv4 } = require("uuid");
+
+const imageDownload = (url) => {
+  if (!(url && /^https?:\/\/[^ ]+$/.test(url)))
+    throw new TypeError("A valid url is required");
+
+  return new Promise((resolve) => {
+    https.get(url, (response) => {
+      let data = Buffer.from([], "binary");
+
+      response.on("data", (chunk) => {
+        const buffer = Buffer.from(chunk, "binary");
+        const length = data.length + buffer.length;
+
+        data = Buffer.concat([data, buffer], length);
+      });
+
+      response.on("end", () => {
+        resolve(data);
+      });
+    });
+  });
+};
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("beautify")
-    .setDescription("Rend une photo de profil plus belle !")
+    .setDescription("test")
     .addUserOption((option) =>
       option
         .setName("user")
@@ -16,69 +39,34 @@ module.exports = {
         .setRequired(false)
     ),
   async execute(interaction) {
-    try {
-      const user = interaction.options.getUser("user") ?? interaction.user;
-      const avatarURL = user.displayAvatarURL({ size: 2048 });
+    await interaction.deferReply();
 
-      const image = await getImageFromURL(avatarURL);
+    const user = interaction.options.getUser("user") ?? interaction.user;
+    const avatarURL = user.displayAvatarURL({ size: 2048 });
 
-      const jar = await Jimp.read("./images/anotherjar.png");
+    const buffer = await imageDownload(avatarURL);
 
-      image.resize(jar.bitmap.width, jar.bitmap.height);
+    const imageBuffer = await sharp(buffer).png().toBuffer();
 
-      jar.mask(image, 0, 0);
+    const image = await Jimp.read(imageBuffer);
+    const jar = await Jimp.read("./images/anotherjar.png");
 
-      const finalBuffer = await jar.getBufferAsync(Jimp.MIME_PNG);
-      const fileName = `jared_${interaction.user.id}.png`;
+    image.resize(jar.bitmap.width, jar.bitmap.height);
+    jar.mask(image, 0, 0);
 
-      await fs.writeFile(fileName, finalBuffer);
+    const finalBuffer = await jar.getBufferAsync(Jimp.MIME_PNG);
 
-      await interaction.reply({
-        content: "**Jared.**",
-        files: [fileName],
-      });
+    const tempFilePath = path.join("./temp", `${uuidv4()}.png`);
+    await fs.promises.writeFile(tempFilePath, finalBuffer);
 
-      await fs.unlink(fileName);
-    } catch (error) {
-      console.error(error);
-      interaction.reply("Erreur lors de la modification de l'image.");
-    } finally {
-      await Promise.all([
-        fs.unlink(__dirname + "/tmp.webp").catch(() => {}),
-        fs.unlink(__dirname + "/tmp.png").catch(() => {}),
-      ]);
-    }
+    await interaction.editReply({
+      content: "**Jared.**",
+      files: [tempFilePath],
+    });
+
+    fs.unlink(tempFilePath, (err) => {
+      if (err) console.error("Error deleting temporary file:", err);
+    });
   },
   inRandomCommand: true,
 };
-
-async function getImageFromURL(imgUrl) {
-  try {
-    const response = await axios.get(imgUrl, { responseType: "stream" });
-    const file = fsbasic.createWriteStream(__dirname + "/tmp.webp");
-    response.data.pipe(file);
-
-    return new Promise((resolve, reject) => {
-      file.on("finish", async () => {
-        try {
-          await webp.dwebp(
-            __dirname + "/tmp.webp",
-            __dirname + "/tmp.png",
-            "-o"
-          );
-          const img = await Jimp.read(__dirname + "/tmp.png");
-          resolve(img);
-        } catch (err) {
-          reject(err);
-        } finally {
-          await fs.unlink(__dirname + "/tmp.webp").catch(() => {});
-          await fs.unlink(__dirname + "/tmp.png").catch(() => {});
-        }
-      });
-
-      file.on("error", reject);
-    });
-  } catch (error) {
-    throw error;
-  }
-}

@@ -8,5 +8,5 @@ module.exports = {
       files: ["./images/jar.png"],
     });
   },
-  inRandomCommand: true
+  inRandomCommand: true,
 };

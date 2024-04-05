@@ -31,7 +31,7 @@ const imageDownload = (url) => {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("beautify")
-    .setDescription("test")
+    .setDescription("Rend une photo de profil plus belle !")
     .addUserOption((option) =>
       option
         .setName("user")

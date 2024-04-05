@@ -80,7 +80,7 @@ module.exports = {
 
     if (allPresent) {
       return await interaction.editReply(
-        `Le [membre](${targetMessage.url}) est déjà **RATIO** !`
+        `❌ Le [membre](${targetMessage.url}) est déjà **RATIO** !`
       );
     } else {
       await targetMessage.react("🇷");

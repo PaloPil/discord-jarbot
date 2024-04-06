@@ -12,11 +12,11 @@ module.exports = {
         .setName("nombre")
         .setDescription("Nombre de mentions à effectuer.")
         .setRequired(false)
-        .setMaxValue(24)
+        .setMaxValue(14)
     ),
 
   async execute(interaction) {
-    const nombre = interaction.options.getInteger("nombre") ?? 7;
+    const nombre = interaction.options.getInteger("nombre") ?? 5;
 
     await interaction.reply({
       content: "Etttt z'est partiiiii !",

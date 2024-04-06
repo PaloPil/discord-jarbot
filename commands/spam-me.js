@@ -12,10 +12,11 @@ module.exports = {
         .setName("nombre")
         .setDescription("Nombre de mentions à effectuer.")
         .setRequired(false)
+        .setMaxValue(24)
     ),
 
   async execute(interaction) {
-    const nombre = interaction.options.getInteger("nombre") ?? 20;
+    const nombre = interaction.options.getInteger("nombre") ?? 7;
 
     await interaction.reply({
       content: "Etttt z'est partiiiii !",
@@ -30,7 +31,7 @@ module.exports = {
             ephemeral: true,
           });
           mention(num - 1);
-        }, 500);
+        }, 756);
       } else {
         interaction.followUp({
           content: "Voili voilou !",

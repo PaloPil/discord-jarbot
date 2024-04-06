@@ -9,11 +9,18 @@ module.exports = {
         .setName("message")
         .setDescription("Identifiant ou lien du message.")
         .setRequired(true)
+    )
+    .addChannelOption((option) =>
+      option
+        .setName("channel")
+        .setDescription("Salon du message à ratio")
+        .setRequired(true)
     ),
   async execute(interaction) {
     await interaction.deferReply();
 
     const message = interaction.options.getString("message");
+    const channel = interaction.options.getChannel("channel");
 
     let messageId;
 
@@ -24,15 +31,15 @@ module.exports = {
     }
 
     try {
-      messageId = interaction.channel.messages.resolveId(messageId);
+      messageId = channel.messages.resolveId(messageId);
     } catch (error) {
       return interaction.reply("**L'ID ou l'URL est incorrecte.**");
     }
 
-    const targetMessage = await interaction.channel.messages.fetch(messageId);
+    const targetMessage = await channel.messages.fetch(messageId);
 
     if (
-      !interaction.channel
+      !channel
         .permissionsFor(interaction.user)
         .has(PermissionsBitField.Flags.SendMessages)
     ) {
@@ -54,15 +61,38 @@ module.exports = {
       );
     }
 
-    await targetMessage.react("🇷");
-    await targetMessage.react("🇦");
-    await targetMessage.react("🇹");
-    await targetMessage.react("🇮");
-    await targetMessage.react("🇴");
+    let reactions = [];
 
-    await interaction.editReply(
-      `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
-    );
+    let toReact = ["🇷", "🇦", "🇹", "🇮", "🇴"];
+
+    await targetMessage.reactions.cache.forEach(async (reaction) => {
+      const emojiName = reaction._emoji.name;
+      await reactions.push(emojiName);
+    });
+
+    let allPresent = true;
+    for (let i = 0; i < toReact.length; i++) {
+      if (!reactions.includes(toReact[i])) {
+        allPresent = false;
+        break;
+      }
+    }
+
+    if (allPresent) {
+      return await interaction.editReply(
+        `❌ Le [membre](${targetMessage.url}) est déjà **RATIO** !`
+      );
+    } else {
+      await targetMessage.react("🇷");
+      await targetMessage.react("🇦");
+      await targetMessage.react("🇹");
+      await targetMessage.react("🇮");
+      await targetMessage.react("🇴");
+
+      await interaction.editReply(
+        `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
+      );
+    }
   },
-  inRandomCommand: false
+  inRandomCommand: false,
 };

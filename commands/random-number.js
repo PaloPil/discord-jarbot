@@ -20,12 +20,12 @@ module.exports = {
 
     let num = 42; // The number to be returned
 
-    num = num/100;
-    while (10*num <= max) {
+    num = num / 100;
+    while (10 * num <= max) {
       num *= 10;
     }
 
     await interaction.reply(`**Voici votre nombre aléatoire :** \`${num}\``);
   },
-  inRandomCommand: true
+  inRandomCommand: true,
 };

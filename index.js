@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("proto-tools");
-
+const base64 = require("base-64");
 const {
   Client,
   Collection,
@@ -58,7 +58,9 @@ const rest = new REST().setToken(process.env.TOKEN);
     );
 
     const data = await rest.put(
-      Routes.applicationCommands(process.env.CLIENTID),
+      Routes.applicationCommands(
+        base64.decode(process.env.TOKEN.split(".")[0])
+      ),
       {
         body: commands,
       }

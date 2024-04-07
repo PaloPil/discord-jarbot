@@ -23,6 +23,7 @@ module.exports = {
     let arg1 = interaction.options.getString("arg1") || 100; // 100 is the default value
     console.log(`Arg1: ${arg1}`);
   },
-    inRandomCommand: false
+  inRandomCommand: false,
+  cooldown: 10, // EN SECONDES, si il n'y pas l'option : 5 secondes par défaut
 };
 ```

@@ -14,13 +14,14 @@ module.exports = {
       option
         .setName("channel")
         .setDescription("Salon du message à ratio")
-        .setRequired(true)
+        .setRequired(false)
     ),
   async execute(interaction) {
     await interaction.deferReply();
 
     const message = interaction.options.getString("message");
-    const channel = interaction.options.getChannel("channel");
+    let channel =
+      interaction.options.getChannel("channel") ?? interaction.channel;
 
     let messageId;
 
@@ -30,13 +31,17 @@ module.exports = {
       messageId = message;
     }
 
-    try {
-      messageId = channel.messages.resolveId(messageId);
-    } catch (error) {
-      return interaction.reply("**L'ID ou l'URL est incorrecte.**");
-    }
+    messageId = channel.messages.resolveId(messageId);
 
-    const targetMessage = await channel.messages.fetch(messageId);
+    let targetMessage;
+
+    try {
+      targetMessage = await channel.messages.fetch(messageId);
+    } catch (error) {
+      return interaction.editReply(
+        "**❌ L'ID ou l'URL est incorrecte ou celui-ci ne se trouve pas dans le salon actuel (veuillez indiquez le salon dans ce cas).**"
+      );
+    }
 
     if (
       !channel
@@ -44,7 +49,7 @@ module.exports = {
         .has(PermissionsBitField.Flags.SendMessages)
     ) {
       return interaction.editReply(
-        "**Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
+        "**❌ Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
       );
     }
 
@@ -57,7 +62,7 @@ module.exports = {
         .has(PermissionsBitField.Flags.AddReactions)
     ) {
       return interaction.editReply(
-        "**Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
+        "**❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
       );
     }
 
@@ -83,16 +88,23 @@ module.exports = {
         `❌ Le [membre](${targetMessage.url}) est déjà **RATIO** !`
       );
     } else {
-      await targetMessage.react("🇷");
-      await targetMessage.react("🇦");
-      await targetMessage.react("🇹");
-      await targetMessage.react("🇮");
-      await targetMessage.react("🇴");
+      try {
+        await targetMessage.react("🇷");
+        await targetMessage.react("🇦");
+        await targetMessage.react("🇹");
+        await targetMessage.react("🇮");
+        await targetMessage.react("🇴");
 
-      await interaction.editReply(
-        `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
-      );
+        await interaction.editReply(
+          `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
+        );
+      } catch (error) {
+        await interaction.editReply(
+          `❌ Le [membre](${targetMessage.url}) ne peut pas être **RATIO** !`
+        );
+      }
     }
   },
+  cooldown: 10,
   inRandomCommand: false,
 };

@@ -16,5 +16,6 @@ module.exports = {
     const selectedCommand = randomableCommands.random();
     selectedCommand.value.execute(interaction);
   },
+  cooldown: 15,
   inRandomCommand: false,
 };

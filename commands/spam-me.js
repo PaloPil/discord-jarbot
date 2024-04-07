@@ -14,7 +14,6 @@ module.exports = {
         .setRequired(false)
         .setMaxValue(14)
     ),
-
   async execute(interaction) {
     const nombre = interaction.options.getInteger("nombre") ?? 5;
 
@@ -42,5 +41,6 @@ module.exports = {
 
     mention(nombre);
   },
+  cooldown: 10,
   inRandomCommand: true,
 };

@@ -39,7 +39,12 @@ module.exports = {
       );
 
     try {
-      channel.send({ embeds: [suggestEmbed] });
+      const message = await channel.send({ embeds: [suggestEmbed] });
+      await channel.threads.create({
+        name: `Suggestion de ${interaction.user.tag}`,
+        startMessage: message,
+        reason: "Nouvelle suggestion de commande !",
+      });
     } catch (e) {
       interaction.editReply(
         ":x: **Il y'a eu une erreur lors de l'envoi de la suggestion. Réessayez ou contactez le support.**\n" +

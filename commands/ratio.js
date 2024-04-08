@@ -37,8 +37,6 @@ module.exports = {
     let targetMessage;
     let targetChannel;
 
-    console.log(messageId, channelId);
-
     try {
       if (channelId) {
         targetChannel = await interaction.guild.channels.fetch(channelId);
@@ -48,7 +46,7 @@ module.exports = {
       }
     } catch (error) {
       return interaction.editReply(
-        "**❌ L'ID ou l'URL est incorrecte ou le message ne se trouve pas dans le salon actuel (Veuillez indiquer le salon dans ce cas ci)**"
+        "> **❌ L'ID ou l'URL est incorrecte ou le message ne se trouve pas dans le salon actuel (Veuillez indiquer le salon dans ce cas ci)**"
       );
     }
 
@@ -58,7 +56,7 @@ module.exports = {
       )
     ) {
       return interaction.editReply(
-        "**❌ Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
+        "> **❌ Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
       );
     }
 
@@ -71,7 +69,7 @@ module.exports = {
         .has(PermissionsBitField.Flags.AddReactions)
     ) {
       return interaction.editReply(
-        "**❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
+        "> **❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
       );
     }
 
@@ -91,18 +89,18 @@ module.exports = {
 
     if (allPresent) {
       return interaction.editReply(
-        `❌ Le [membre](${targetMessage.url}) est déjà **RATIO** !`
+        `> ❌ Le [membre](${targetMessage.url}) est déjà **RATIO** !`
       );
     } else {
       try {
         await Promise.all(toReact.map((emoji) => targetMessage.react(emoji)));
 
         return interaction.editReply(
-          `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
+          `> ✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
         );
       } catch (error) {
         return interaction.editReply(
-          `❌ Le [membre](${targetMessage.url}) ne peut pas être **RATIO** !`
+          `> ❌ Le [membre](${targetMessage.url}) ne peut pas être **RATIO** !`
         );
       }
     }

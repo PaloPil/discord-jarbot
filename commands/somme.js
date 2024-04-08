@@ -3,11 +3,7 @@ const path = require("node:path");
 
 const command_name = path.basename(__filename).replace(".js", "");
 
-const reponses = [
-  "42",
-  "∞",
-  "Quarante-douze"
-];
+const reponses = ["42", "∞", "Quarante-douze"];
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -27,11 +23,15 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    
     const n1 = interaction.options.getInteger("a");
     const n2 = interaction.options.getInteger("b");
 
-    await interaction.reply(`\`${n1}\` ${n2>=0 ? "+" : "-"} \`${n2>0 ? n2 : -n2}\` = \`${Array.from(reponses).random()}\``);
+    await interaction.reply(
+      `\`${n1}\` ${n2 >= 0 ? "+" : "-"} \`${
+        n2 > 0 ? n2 : -n2
+      }\` = \`${Array.from(reponses).random()}\``
+    );
   },
-  inRandomCommand: false
+  cooldown: 0,
+  inRandomCommand: false,
 };

@@ -7,20 +7,19 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName(command_name)
     .setDescription("Te spam de mentions.")
-    .addIntegerOption(option =>
+    .addIntegerOption((option) =>
       option
         .setName("nombre")
         .setDescription("Nombre de mentions à effectuer.")
         .setRequired(false)
+        .setMaxValue(14)
     ),
-
   async execute(interaction) {
-
-    const nombre = interaction.options.getInteger("nombre") ?? 20;
+    const nombre = interaction.options.getInteger("nombre") ?? 5;
 
     await interaction.reply({
-      content : "Etttt z'est partiiiii !",
-      ephemeral : true
+      content: "Etttt z'est partiiiii !",
+      ephemeral: true,
     });
 
     function mention(num) {
@@ -28,19 +27,20 @@ module.exports = {
         setTimeout(() => {
           interaction.followUp({
             content: `Hey <@${interaction.user.id}> !`,
-            ephemeral: true
+            ephemeral: true,
           });
           mention(num - 1);
-        }, 500);
+        }, 756);
       } else {
         interaction.followUp({
           content: "Voili voilou !",
-          ephemeral: true
+          ephemeral: true,
         });
       }
     }
 
     mention(nombre);
   },
-  inRandomCommand: true
+  cooldown: 10,
+  inRandomCommand: true,
 };

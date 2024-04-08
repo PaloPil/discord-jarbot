@@ -27,7 +27,8 @@ module.exports = {
         );
     }),
   async execute(interaction) {
-    const selectedType = interaction.options.getString("category") ?? typeBlagues.random();
+    const selectedType =
+      interaction.options.getString("category") ?? typeBlagues.random();
 
     try {
       const category = blagues.categories[selectedType.toUpperCase()];
@@ -59,7 +60,8 @@ module.exports = {
       );
     }
   },
-  inRandomCommand: true
+  cooldown: 10,
+  inRandomCommand: true,
 };
 
 async function fetchBlague(token, category, excludedCategories) {

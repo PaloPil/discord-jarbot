@@ -141,3 +141,9 @@ compose.yaml
 Dockerfile
 README.Docker.md
 .dockerignore
+
+# VSCode
+.vscode/
+
+# Work in progress
+utils/

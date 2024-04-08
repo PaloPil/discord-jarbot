@@ -8,5 +8,6 @@ module.exports = {
       files: ["./images/jar.png"],
     });
   },
-  inRandomCommand: true
+  cooldown: 5,
+  inRandomCommand: true,
 };

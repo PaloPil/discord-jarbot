@@ -60,6 +60,7 @@ module.exports = {
       );
     }
   },
+  cooldown: 10,
   inRandomCommand: true,
 };
 

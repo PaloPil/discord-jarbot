@@ -32,5 +32,6 @@ module.exports = {
       }\` = \`${Array.from(reponses).random()}\``
     );
   },
+  cooldown: 0,
   inRandomCommand: false,
 };

@@ -13,86 +13,100 @@ module.exports = {
     .addChannelOption((option) =>
       option
         .setName("channel")
-        .setDescription("Salon du message à ratio")
-        .setRequired(true)
+        .setDescription("Salon du message à RATIO")
+        .setRequired(false)
     ),
   async execute(interaction) {
     await interaction.deferReply();
 
     const message = interaction.options.getString("message");
-    const channel = interaction.options.getChannel("channel");
+    let channel =
+      interaction.options.getChannel("channel") ?? interaction.channel;
 
     let messageId;
+    let channelId;
 
     if (message.startsWith("https://")) {
-      messageId = message.split("/")[6];
+      const urlParts = message.split("/");
+      messageId = urlParts.pop();
+      channelId = urlParts[5];
     } else {
       messageId = message;
     }
 
+    let targetMessage;
+    let targetChannel;
+
+    console.log(messageId, channelId);
+
     try {
-      messageId = channel.messages.resolveId(messageId);
+      if (channelId) {
+        targetChannel = await interaction.guild.channels.fetch(channelId);
+        targetMessage = await targetChannel.messages.fetch(messageId);
+      } else {
+        targetMessage = await channel.messages.fetch(messageId);
+      }
     } catch (error) {
-      return interaction.reply("**L'ID ou l'URL est incorrecte.**");
+      return interaction.editReply(
+        "**❌ L'ID ou l'URL est incorrecte ou le message ne se trouve pas dans le salon actuel (Veuillez indiquer le salon dans ce cas ci)**"
+      );
     }
 
-    const targetMessage = await channel.messages.fetch(messageId);
-
     if (
-      !channel
-        .permissionsFor(interaction.user)
-        .has(PermissionsBitField.Flags.SendMessages)
+      !interaction.member.permissions.has(
+        PermissionsBitField.Flags.SendMessages
+      )
     ) {
       return interaction.editReply(
-        "**Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
+        "**❌ Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
       );
     }
 
     if (
       !targetMessage.channel
-        .permissionsFor(interaction.user)
-        .has(PermissionsBitField.Flags.SendMessages) &&
+        .permissionsFor(interaction.member)
+        .has(PermissionsBitField.Flags.SendMessages) ||
       !targetMessage.channel
-        .permissionsFor(interaction.user)
+        .permissionsFor(interaction.member)
         .has(PermissionsBitField.Flags.AddReactions)
     ) {
       return interaction.editReply(
-        "**Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
+        "**❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
       );
     }
 
-    let reactions = [];
-
-    let toReact = ["🇷", "🇦", "🇹", "🇮", "🇴"];
-
-    await targetMessage.reactions.cache.forEach(async (reaction) => {
-      const emojiName = reaction._emoji.name;
-      await reactions.push(emojiName);
-    });
+    let reactions = targetMessage.reactions.cache.map(
+      (reaction) => reaction._emoji.name
+    );
 
     let allPresent = true;
-    for (let i = 0; i < toReact.length; i++) {
-      if (!reactions.includes(toReact[i])) {
+    const toReact = ["🇷", "🇦", "🇹", "🇮", "🇴"];
+
+    for (const emoji of toReact) {
+      if (!reactions.includes(emoji)) {
         allPresent = false;
         break;
       }
     }
 
     if (allPresent) {
-      return await interaction.editReply(
+      return interaction.editReply(
         `❌ Le [membre](${targetMessage.url}) est déjà **RATIO** !`
       );
     } else {
-      await targetMessage.react("🇷");
-      await targetMessage.react("🇦");
-      await targetMessage.react("🇹");
-      await targetMessage.react("🇮");
-      await targetMessage.react("🇴");
+      try {
+        await Promise.all(toReact.map((emoji) => targetMessage.react(emoji)));
 
-      await interaction.editReply(
-        `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
-      );
+        return interaction.editReply(
+          `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
+        );
+      } catch (error) {
+        return interaction.editReply(
+          `❌ Le [membre](${targetMessage.url}) ne peut pas être **RATIO** !`
+        );
+      }
     }
   },
+  cooldown: 10,
   inRandomCommand: false,
 };

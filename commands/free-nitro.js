@@ -8,7 +8,7 @@ module.exports = {
     await interaction.deferReply();
 
     const embed = new EmbedBuilder()
-      .setColor("#00ff00")
+      .setColor("#e74c3c")
       .setTitle("Chargement...")
       .setDescription("**Téléchargement de Nitro gratuit...**")
       .setFooter({
@@ -40,4 +40,6 @@ module.exports = {
       .setFooter({ text: "Merci d'avoir attendu." });
     await interaction.editReply({ embeds: [embed] });
   },
+  cooldown: 10,
+  inRandomCommand: true,
 };

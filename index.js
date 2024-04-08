@@ -15,6 +15,7 @@ const path = require("node:path");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
+client.cooldowns = new Collection();
 
 const commands = [];
 const commandsPath = path.join(__dirname, "commands");

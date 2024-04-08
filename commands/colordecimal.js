@@ -36,5 +36,6 @@ module.exports = {
       embeds: [embed],
     });
   },
+  cooldown: 0,
   inRandomCommand: true,
 };

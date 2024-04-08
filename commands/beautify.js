@@ -68,5 +68,6 @@ module.exports = {
       if (err) console.error("Error deleting temporary file:", err);
     });
   },
+  cooldown: 10,
   inRandomCommand: true,
 };

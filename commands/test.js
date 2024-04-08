@@ -38,11 +38,14 @@ module.exports = {
         }, 1000);
     }
 
-    if (arg2 == 1) {
-        await interaction.followUp(`Réponse`);
-    } else {
-        await interaction.followUp({ content: `Réponse`, ephemeral: true });
-    }
+
+    setTimeout(async () => {
+        if (arg2 == 1) {
+            await interaction.followUp(`Réponse following`);
+        } else {
+            await interaction.followUp({ content: `Réponse following`, ephemeral: true });
+        }
+    }, 5000);
 
   },
     inRandomCommand: false

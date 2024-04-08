@@ -13,7 +13,7 @@ module.exports = {
     .addChannelOption((option) =>
       option
         .setName("channel")
-        .setDescription("Salon du message à ratio")
+        .setDescription("Salon du message à RATIO")
         .setRequired(false)
     ),
   async execute(interaction) {

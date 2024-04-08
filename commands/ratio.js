@@ -45,9 +45,8 @@ module.exports = {
         targetMessage = await channel.messages.fetch(messageId);
       }
     } catch (error) {
-      console.error(error);
       return interaction.editReply(
-        "> **❌ L'ID ou l'URL est incorrecte ou le message ne se trouve pas dans le salon actuel (Veuillez indiquer le salon dans ce cas ci)**"
+        "> **❌ Impossible de récupérer le message**.\n- **Vérifiez si l'ID ou l'URL est correcte.**\n- **Vérifiez dans les permissions que le bot puisse accéder au salon.**\n- **Si vous avez indiqué un identifiant d'un message qui ne se trouve pas dans le salon actuel vous devez obligatoirement indiquer le salon où il se situe.**"
       );
     }
 

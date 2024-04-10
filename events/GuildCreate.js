@@ -19,7 +19,6 @@ module.exports = {
           `Nouveau serveur ajouté à la base de données : ${guild.name}`
         );
       } else {
-        // Si la guilde existe déjà, vous pouvez la marquer comme disponible
         existingGuild.available = true;
         await existingGuild.save();
         console.log(`Serveur réintégré à la base de données : ${guild.name}`);

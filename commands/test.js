@@ -25,28 +25,29 @@ module.exports = {
     // Args handling
     let arg1 = interaction.options.getInteger("arg1") || 0;
     let arg2 = interaction.options.getInteger("arg2") || 0;
-    
+
     if (arg1 == 1) {
-        await interaction.deferReply();
-        setTimeout(async () => {
-            await interaction.editReply(`Réponse`);
-        }, 1000);
+      await interaction.deferReply();
+      setTimeout(async () => {
+        await interaction.editReply(`Réponse`);
+      }, 1000);
     } else {
-        await interaction.deferReply({ ephemeral: true });
-        setTimeout(async () => {
-            await interaction.editReply(`Réponse`);
-        }, 1000);
+      await interaction.deferReply({ ephemeral: true });
+      setTimeout(async () => {
+        await interaction.editReply(`Réponse`);
+      }, 1000);
     }
 
-
     setTimeout(async () => {
-        if (arg2 == 1) {
-            await interaction.followUp(`Réponse following`);
-        } else {
-            await interaction.followUp({ content: `Réponse following`, ephemeral: true });
-        }
+      if (arg2 == 1) {
+        await interaction.followUp(`Réponse following`);
+      } else {
+        await interaction.followUp({
+          content: `Réponse following`,
+          ephemeral: true,
+        });
+      }
     }, 5000);
-
   },
-    inRandomCommand: false
+  inRandomCommand: false,
 };

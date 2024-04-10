@@ -9,104 +9,60 @@ module.exports = {
         .setName("message")
         .setDescription("Identifiant ou lien du message.")
         .setRequired(true)
-    )
-    .addChannelOption((option) =>
-      option
-        .setName("channel")
-        .setDescription("Salon du message à RATIO")
-        .setRequired(false)
     ),
   async execute(interaction) {
     await interaction.deferReply();
 
     const message = interaction.options.getString("message");
-    let channel =
-      interaction.options.getChannel("channel") ?? interaction.channel;
 
     let messageId;
-    let channelId;
 
     if (message.startsWith("https://")) {
-      const urlParts = message.split("/");
-      messageId = urlParts.pop();
-      channelId = urlParts[5];
+      messageId = message.split("/")[6];
     } else {
       messageId = message;
     }
 
-    let targetMessage;
-    let targetChannel;
-
-    console.log(messageId, channelId);
-
     try {
-      if (channelId) {
-        targetChannel = await interaction.guild.channels.fetch(channelId);
-        targetMessage = await targetChannel.messages.fetch(messageId);
-      } else {
-        targetMessage = await channel.messages.fetch(messageId);
-      }
+      messageId = interaction.channel.messages.resolveId(messageId);
     } catch (error) {
-      return interaction.editReply(
-        "**❌ L'ID ou l'URL est incorrecte ou le message ne se trouve pas dans le salon actuel (Veuillez indiquer le salon dans ce cas ci)**"
-      );
+      return interaction.reply("**L'ID ou l'URL est incorrecte.**");
     }
 
+    const targetMessage = await interaction.channel.messages.fetch(messageId);
+
     if (
-      !interaction.member.permissions.has(
-        PermissionsBitField.Flags.SendMessages
-      )
+      !interaction.channel
+        .permissionsFor(interaction.user)
+        .has(PermissionsBitField.Flags.SendMessages)
     ) {
       return interaction.editReply(
-        "**❌ Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
+        "**Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
       );
     }
 
     if (
       !targetMessage.channel
-        .permissionsFor(interaction.member)
-        .has(PermissionsBitField.Flags.SendMessages) ||
+        .permissionsFor(interaction.user)
+        .has(PermissionsBitField.Flags.SendMessages) &&
       !targetMessage.channel
-        .permissionsFor(interaction.member)
+        .permissionsFor(interaction.user)
         .has(PermissionsBitField.Flags.AddReactions)
     ) {
       return interaction.editReply(
-        "**❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
+        "**Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
       );
     }
 
-    let reactions = targetMessage.reactions.cache.map(
-      (reaction) => reaction._emoji.name
+    await targetMessage.react("🇷");
+    await targetMessage.react("🇦");
+    await targetMessage.react("🇹");
+    await targetMessage.react("🇮");
+    await targetMessage.react("🇴");
+
+    await interaction.editReply(
+      `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
     );
-
-    let allPresent = true;
-    const toReact = ["🇷", "🇦", "🇹", "🇮", "🇴"];
-
-    for (const emoji of toReact) {
-      if (!reactions.includes(emoji)) {
-        allPresent = false;
-        break;
-      }
-    }
-
-    if (allPresent) {
-      return interaction.editReply(
-        `❌ Le [membre](${targetMessage.url}) est déjà **RATIO** !`
-      );
-    } else {
-      try {
-        await Promise.all(toReact.map((emoji) => targetMessage.react(emoji)));
-
-        return interaction.editReply(
-          `✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
-        );
-      } catch (error) {
-        return interaction.editReply(
-          `❌ Le [membre](${targetMessage.url}) ne peut pas être **RATIO** !`
-        );
-      }
-    }
   },
-  cooldown: 10,
   inRandomCommand: false,
 };

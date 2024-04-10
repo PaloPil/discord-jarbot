@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { cooldown } = require("./ratio");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,6 +23,5 @@ module.exports = {
 
     await interaction.editReply({ embeds: [embed] });
   },
-  cooldown: 0,
   inRandomCommand: true,
 };

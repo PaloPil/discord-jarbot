@@ -8,7 +8,7 @@ const {
   REST,
   Routes,
 } = require("discord.js");
-
+const mongoose = require("mongoose");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -16,6 +16,15 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 client.cooldowns = new Collection();
+
+const db = `mongodb+srv://${process.env.DBUSERNAME}:${encodeURIComponent(
+  process.env.DBPASSWORD
+)}${process.env.MONGOURI}`;
+
+mongoose
+  .connect(db)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log(err));
 
 const commands = [];
 const commandsPath = path.join(__dirname, "commands");

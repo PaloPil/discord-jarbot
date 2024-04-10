@@ -1,0 +1,9 @@
+{
+  "COMMANDS": [
+    {
+      "NAME": "SETLANG",
+      "SUCCESS": "✅ Server's language has been changed!",
+      "FAILED": "❌ Couldn't change server's language."
+    }
+  ]
+}

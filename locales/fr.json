@@ -1,0 +1,9 @@
+{
+  "COMMANDS": [
+    {
+      "NAME": "SETLANG",
+      "SUCCESS": "✅ La langue a été changé avec succès !",
+      "FAILED": "❌ La langue n'a pas pu être changé."
+    }
+  ]
+}

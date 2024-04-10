@@ -95,7 +95,7 @@ module.exports = {
       try {
         await Promise.all(toReact.map((emoji) => targetMessage.react(emoji)));
 
-        return interaction.editReply(
+        return interaction.channel.send(
           `> ✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
         );
       } catch (error) {

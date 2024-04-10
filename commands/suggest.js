@@ -6,6 +6,12 @@ module.exports = {
     .setDescription("Suggérer une commande à ajouter sur le bot !")
     .addStringOption((option) => {
       return option
+        .setName("title")
+        .setDescription("Titre de ta suggestion")
+        .setRequired(true);
+    })
+    .addStringOption((option) => {
+      return option
         .setName("suggestion")
         .setDescription("Décris ta suggestions de commande")
         .setRequired(true);
@@ -17,6 +23,7 @@ module.exports = {
     const channel = await guild.channels.fetch("1226332016858103909"); // Salon de suggestion du support
     const suggest = await interaction.options.getString("suggestion");
     const user = await interaction.guild.members.fetch(interaction.user.id);
+    const title = await interaction.options.getString("title");
 
     const suggestEmbed = new EmbedBuilder()
       .setColor("#9b59b6")
@@ -33,6 +40,10 @@ module.exports = {
           inline: true,
         },
         {
+          name: "**Titre de la suggestion :**",
+          value: `\`\`\`\n${title}\n\`\`\``,
+        },
+        {
           name: "**Suggestion :**",
           value: `\`\`\`\n${suggest}\n\`\`\``,
         }
@@ -41,9 +52,9 @@ module.exports = {
     try {
       const message = await channel.send({ embeds: [suggestEmbed] });
       await channel.threads.create({
-        name: `Suggestion de ${interaction.user.tag}`,
+        name: title,
         startMessage: message,
-        reason: "Nouvelle suggestion de commande !",
+        reason: `Suggestion de ${interaction.user.tag}`,
       });
     } catch (e) {
       interaction.editReply(

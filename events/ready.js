@@ -6,7 +6,7 @@ module.exports = {
   async execute(client) {
     client.user.setPresence({
       activities: [{ name: "Just A Random Bot", type: ActivityType.PLAYING }],
-      status: "idle",
+      status: "online",
     });
     console.log(`Client connected as ${client.user.tag}!`);
   },

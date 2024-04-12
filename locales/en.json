@@ -37,6 +37,12 @@
     {
       "NAME": "SUM",
       "RESPONSES": ["42", "∞", "Forty-two"]
+    },
+    {
+      "NAME": "SUGGEST",
+      "EMBED_TITLE": "Your suggestion has been sent!",
+      "EMBED_DESCRIPTION": "**Thanks for your suggestion!**",
+      "ERROR_CANNOT_SEND_SUGGEST": "❌ **An error occured while sending the suggestion, please retry or contact the support.**"
     }
   ]
 }

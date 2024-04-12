@@ -7,34 +7,30 @@ module.exports = {
     .setName("setlang")
     .setNameLocalizations({
       fr: "langue",
-      "en-US": "setlang",
     })
     .setDescription("Changer la langue du bot")
     .setDescriptionLocalizations({
-      fr: "Changer la langue du bot",
       "en-US": "Change bot's language",
     })
-    .addStringOption((option) =>
-      option
-        .setName("language")
+    .addStringOption((option) => {
+      return option
+        .setName("langue")
         .setNameLocalizations({
-          fr: "langage",
           "en-US": "language",
         })
-        .setDescription("Langue à définir")
+        .setDescription("Langue à lequelle changer.")
         .setDescriptionLocalizations({
-          fr: "Langue à définir",
-          "en-US": "The language to change to",
+          "en-US": "The language to change to.",
         })
         .setRequired(true)
         .addChoices(
           { name: "Français", value: "fr" },
           { name: "English", value: "en" }
-        )
-    )
+        );
+    })
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
   async execute(interaction) {
-    const newLanguage = interaction.options.getString("language");
+    const newLanguage = interaction.options.getString("langue");
     const guild = await Guild.findOneAndUpdate(
       { id: interaction.guild.id },
       { language: newLanguage },
@@ -42,13 +38,15 @@ module.exports = {
     );
 
     if (guild) {
+      await interaction.deferReply();
       const success = lang("SETLANG")(guild.language, { string: "SUCCESS" });
-      interaction.reply(success);
+      interaction.editReply(success);
     } else {
+      await interaction.deferReply({ ephemeral: true });
       const failed = lang("SETLANG")(guild.language, { string: "FAILED" });
-      interaction.reply(failed);
+      interaction.editReply(failed);
     }
   },
   cooldown: 0,
-  inRandomCommand: true,
+  inRandomCommand: false,
 };

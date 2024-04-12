@@ -133,9 +133,6 @@ dist
 # Lock files
 package-lock.json
 
-# Private files
-config.json
-
 # Docker files (Just testing for now, it's not sure to be added)
 compose.yaml
 Dockerfile
@@ -145,5 +142,5 @@ README.Docker.md
 # VSCode
 .vscode/
 
-# Work in progress
-utils/
+# Test command
+test.txt

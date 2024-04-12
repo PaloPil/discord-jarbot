@@ -6,11 +6,17 @@ const command_name = path.basename(__filename).replace(".js", "");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName(command_name)
-    .setDescription("Donne un nombre aléatoire entre 0 et 100. (configurable)")
+    .setDescription("Donne un nombre aléatoire entre 0 et 100")
+    .setDescriptionLocalizations({
+      "en-US": "Gives a random number between 0 and 100",
+    })
     .addIntegerOption((option) =>
       option
         .setName("max")
-        .setDescription("Description de l'argument ici.")
+        .setDescription("Le numéro maximum")
+        .setDescriptionLocalizations({
+          "en-US": "The max number",
+        })
         .setRequired(false)
         .setMinValue(1)
     ),

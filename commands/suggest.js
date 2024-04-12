@@ -1,17 +1,29 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const Guild = require("../utils/Guild.js");
+const lang = require("../utils/language.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("suggest")
+    .setNameLocalizations({
+      fr: "suggérer",
+    })
     .setDescription("Suggérer une commande à ajouter sur le bot !")
+    .setDescriptionLocalizations({
+      "en-US": "Suggest a command to add!",
+    })
     .addStringOption((option) => {
       return option
         .setName("suggestion")
-        .setDescription("Décris ta suggestions de commande")
+        .setDescription("Décris ta suggestion de commande")
+        .setDescriptionLocalizations({
+          "en-US": "Describe your suggestion",
+        })
         .setRequired(true);
     }),
   async execute(interaction) {
     await interaction.deferReply({ ephemeral: true });
+    const guildDB = await Guild.findOne({ id: interaction.guild.id });
 
     const guild = await interaction.client.guilds.fetch("1226328890717507658"); // Serveur support
     const channel = await guild.channels.fetch("1226332016858103909"); // Salon de suggestion du support
@@ -47,15 +59,18 @@ module.exports = {
       });
     } catch (e) {
       interaction.editReply(
-        ":x: **Il y'a eu une erreur lors de l'envoi de la suggestion. Réessayez ou contactez le support.**\n" +
-          e
+        lang("SUGGEST")(guildDB.language, {
+          string: "ERROR_CANNOT_SEND_SUGGEST",
+        })
       );
     }
 
     const embed = new EmbedBuilder()
       .setColor("#52fa56")
-      .setTitle("Votre suggestion a bien été envoyé !")
-      .setDescription("**Merci pour votre suggestion !**")
+      .setTitle(lang("SUGGEST")(guildDB.language, { string: "EMBED_TITLE" }))
+      .setDescription(
+        lang("SUGGEST")(guildDB.language, { string: "EMBED_DESCRIPTION" })
+      )
       .setAuthor({ name: user.displayName, iconURL: user.displayAvatarURL() })
       .setImage(interaction.client.user.displayAvatarURL());
 

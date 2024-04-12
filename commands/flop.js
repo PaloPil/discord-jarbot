@@ -30,23 +30,20 @@ const imageDownload = (url) => {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("beautify")
-    .setNameLocalizations({
-      fr: "embellir",
-    })
-    .setDescription("Rend une photo de profil plus belle !")
+    .setName("flop")
+    .setDescription("Donne une certification de FLOP")
     .setDescriptionLocalizations({
-      "en-US": "Make a profile picture more beautiful!",
+      "en-US": "Provides FLOP certification",
     })
     .addUserOption((option) =>
       option
-        .setName("user")
+        .setName("utilisateur")
         .setNameLocalizations({
-          fr: "utilisateur",
+          "en-US": "user",
         })
-        .setDescription("L'utilisateur à embellir !")
+        .setDescription("L'utilisateur qui a FLOP")
         .setDescriptionLocalizations({
-          "en-US": "The user to beautify!",
+          "en-US": "The used that FLOP",
         })
         .setRequired(false)
     ),
@@ -61,18 +58,25 @@ module.exports = {
     const imageBuffer = await sharp(buffer).png().toBuffer();
 
     const image = await Jimp.read(imageBuffer);
-    const jar = await Jimp.read("./images/anotherjar.png");
+    const flop = await Jimp.read("./images/FLOP.png");
 
-    image.resize(jar.bitmap.width, jar.bitmap.height);
-    jar.mask(image, 0, 0);
+    flop.resize(image.bitmap.width, Jimp.AUTO);
 
-    const finalBuffer = await jar.getBufferAsync(Jimp.MIME_PNG);
+    image.grayscale();
+
+    image.composite(flop, 0, 100, {
+      mode: Jimp.BLEND_SOURCE_OVER,
+      opacityDest: 1,
+      opacitySource: 1,
+    });
+
+    const finalBuffer = await image.getBufferAsync(Jimp.MIME_PNG);
 
     const tempFilePath = path.join("./temp", `${uuidv4()}.png`);
     await fs.promises.writeFile(tempFilePath, finalBuffer);
 
     await interaction.editReply({
-      content: "**Jared.**",
+      content: "**FLOP.**",
       files: [tempFilePath],
     });
 

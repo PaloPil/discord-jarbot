@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const Guild = require("../utils/Guild.js");
+const lang = require("../utils/language.js");
 const path = require("node:path");
 
 const command_name = path.basename(__filename).replace(".js", "");
@@ -7,10 +9,19 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName(command_name)
     .setDescription("Te spam de mentions.")
+    .setDescriptionLocalizations({
+      "en-US": "Spams you with mentions.",
+    })
     .addIntegerOption((option) =>
       option
         .setName("nombre")
+        .setNameLocalizations({
+          "en-US": "number",
+        })
         .setDescription("Nombre de mentions à effectuer.")
+        .setDescriptionLocalizations({
+          "en-US": "Number of mentions.",
+        })
         .setRequired(false)
         .setMaxValue(14)
     ),

@@ -1,25 +1,39 @@
 const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
+const Guild = require("../utils/Guild.js");
+const lang = require("../utils/language.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ratio")
     .setDescription("Ajoute les réactions RATIO à un message")
+    .setDescriptionLocalizations({
+      "en-US": "Add the reactions RATIO to a message",
+    })
     .addStringOption((option) =>
       option
         .setName("message")
         .setDescription("Identifiant ou lien du message.")
-        .setRequired(true)
+        .setDescriptionLocalizations({
+          "en-US": "Message ID or link",
+        })
+        .setRequired(false)
     )
     .addChannelOption((option) =>
       option
         .setName("channel")
+        .setNameLocalizations({
+          fr: "salon",
+        })
         .setDescription("Salon du message à RATIO")
+        .setDescriptionLocalizations({
+          "en-US": "The message's channel",
+        })
         .setRequired(false)
     ),
   async execute(interaction) {
-    await interaction.deferReply();
+    const guild = await Guild.findOne({ id: interaction.guild.id });
 
-    const message = interaction.options.getString("message");
+    const message = await interaction.options.getString("message");
     let channel =
       interaction.options.getChannel("channel") ?? interaction.channel;
 
@@ -45,8 +59,9 @@ module.exports = {
         targetMessage = await channel.messages.fetch(messageId);
       }
     } catch (error) {
+      await interaction.deferReply({ ephemeral: true });
       return interaction.editReply(
-        "> **❌ Impossible de récupérer le message**.\n- **Vérifiez si l'ID ou l'URL est correcte.**\n- **Vérifiez dans les permissions que le bot puisse accéder au salon.**\n- **Si vous avez indiqué un identifiant d'un message qui ne se trouve pas dans le salon actuel vous devez obligatoirement indiquer le salon où il se situe.**"
+        lang("RATIO")(guild.language, { string: "ERROR_CANNOT_FETCH_MESSAGE" })
       );
     }
 
@@ -55,8 +70,9 @@ module.exports = {
         PermissionsBitField.Flags.SendMessages
       )
     ) {
+      await interaction.deferReply({ ephemeral: true });
       return interaction.editReply(
-        "> **❌ Vous n'avez pas la permission d'envoyer des messages dans ce salon.**"
+        lang("RATIO")(guild.language, { string: "NO_CHANNEL_SEND_PERMISSION" })
       );
     }
 
@@ -68,8 +84,9 @@ module.exports = {
         .permissionsFor(interaction.member)
         .has(PermissionsBitField.Flags.AddReactions)
     ) {
+      await interaction.deferReply({ ephemeral: true });
       return interaction.editReply(
-        "> **❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**"
+        lang("RATIO")(guild.language, { string: "NO_ADD_REACTIONS_PERMISSION" })
       );
     }
 
@@ -88,19 +105,30 @@ module.exports = {
     }
 
     if (allPresent) {
+      await interaction.deferReply({ ephemeral: true });
       return interaction.editReply(
-        `> ❌ Le [membre](${targetMessage.url}) est déjà **RATIO** !`
+        lang("RATIO")(guild.language, {
+          string: "USER_ALREADY_RATIO",
+          targetMessage: targetMessage.url,
+        })
       );
     } else {
       try {
         await Promise.all(toReact.map((emoji) => targetMessage.react(emoji)));
-
+        await interaction.deferReply();
         return interaction.channel.send(
-          `> ✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
+          lang("RATIO")(guild.language, {
+            string: "USER_SUCCESS_RATIO",
+            targetMessage: targetMessage.url,
+          })
         );
       } catch (error) {
+        await interaction.deferReply({ ephemeral: true });
         return interaction.editReply(
-          `> ❌ Le [membre](${targetMessage.url}) ne peut pas être **RATIO** !`
+          lang("RATIO")(guild.language, {
+            string: "USER_CANNOT_BE_RATIO",
+            targetMessage: targetMessage.url,
+          })
         );
       }
     }

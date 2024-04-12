@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "bot",
+      name: "jarbot",
       script: "index.js",
       instances: "1",
       env_production: {

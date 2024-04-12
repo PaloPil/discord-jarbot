@@ -3,7 +3,10 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("random")
-    .setDescription("Exécute une commande aléatoire"),
+    .setDescription("Exécute une commande aléatoire")
+    .setDescriptionLocalizations({
+      "en-US": "Execute a random command",
+    }),
   async execute(interaction) {
     const commands = interaction.client.commands;
     const commandsArray = Array.from(commands, ([name, value]) => ({

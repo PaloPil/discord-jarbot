@@ -6,7 +6,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("colordecimal")
     .setDescription(
-      "Convertis un code couleur hexadécimal en décimal ou donne un aléatoire"
+      "Convertit un code couleur hexadécimal en décimal ou donne un aléatoire"
     )
     .setDescriptionLocalizations({
       "en-US":

@@ -3,11 +3,9 @@ const path = require("node:path");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
 
-const command_name = path.basename(__filename).replace(".js", "");
-
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName(command_name)
+    .setName("sum")
     .setNameLocalizations({
       fr: "somme",
     })

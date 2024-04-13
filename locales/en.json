@@ -47,6 +47,10 @@
     {
       "NAME": "BEAUTIFY",
       "TRY_ON_BOT": "I'm already beautiful, I don't need more :3"
+    },
+    {
+      "NAME": "RANDOM-NUMBER",
+      "RESPONSE": "**Here's your random number:** `{num}`"
     }
   ]
 }

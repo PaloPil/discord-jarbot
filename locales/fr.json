@@ -47,6 +47,10 @@
     {
       "NAME": "BEAUTIFY",
       "TRY_ON_BOT": "Je suis déjà très beau je n'ai pas besoin de + :3"
+    },
+    {
+      "NAME": "RANDOM-NUMBER",
+      "RESPONSE": "**Voici votre nombre aléatoire :** `{num}`"
     }
   ]
 }

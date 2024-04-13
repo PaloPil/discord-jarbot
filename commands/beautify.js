@@ -5,6 +5,8 @@ const path = require("path");
 const sharp = require("sharp");
 const https = require("https");
 const { v4: uuidv4 } = require("uuid");
+const Guild = require("../utils/Guild.js");
+const lang = require("../utils/language.js");
 
 const imageDownload = (url) => {
   if (!(url && /^https?:\/\/[^ ]+$/.test(url)))
@@ -54,6 +56,14 @@ module.exports = {
     await interaction.deferReply();
 
     const user = interaction.options.getUser("user") ?? interaction.user;
+    const guild = await Guild.findOne({ id: interaction.guild.id });
+
+    if (user.id == interaction.client.user.id) {
+      return interaction.editReply(
+        lang("BEAUTIFY")(guild.language, { string: "TRY_ON_BOT" })
+      );
+    }
+
     const avatarURL = user.displayAvatarURL({ size: 2048 });
 
     const buffer = await imageDownload(avatarURL);

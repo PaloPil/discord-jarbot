@@ -43,6 +43,10 @@
       "EMBED_TITLE": "Votre suggestion a bien été envoyé !",
       "EMBED_DESCRIPTION": "**Merci pour votre suggestion !**",
       "ERROR_CANNOT_SEND_SUGGEST": "❌ **Il y'a eu une erreur lors de l'envoi de la suggestion. Réessayez ou contactez le support.**"
+    },
+    {
+      "NAME": "BEAUTIFY",
+      "TRY_ON_BOT": "Je suis déjà très beau je n'ai pas besoin de + :3"
     }
   ]
 }

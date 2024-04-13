@@ -36,13 +36,17 @@
     },
     {
       "NAME": "SUM",
-      "RESPONSES": ["42", "∞", "Forty-two"]
+      "RESPONSES": ["42", "∞"]
     },
     {
       "NAME": "SUGGEST",
       "EMBED_TITLE": "Your suggestion has been sent!",
       "EMBED_DESCRIPTION": "**Thanks for your suggestion!**",
       "ERROR_CANNOT_SEND_SUGGEST": "❌ **An error occured while sending the suggestion, please retry or contact the support.**"
+    },
+    {
+      "NAME": "BEAUTIFY",
+      "TRY_ON_BOT": "I'm already beautiful, I don't need more :3"
     }
   ]
 }

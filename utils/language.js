@@ -1,6 +1,6 @@
 function lang(commandName) {
-  const frData = require("../locales/fr.json");
-  const enData = require("../locales/en.json");
+  const frData = require("../langs/fr.json"); 
+  const enData = require("../langs/en.json");
 
   return function (language, args) {
     const langData = language === "fr" ? frData : enData;

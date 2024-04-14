@@ -60,9 +60,10 @@ module.exports = {
       }
     } catch (error) {
       await interaction.deferReply({ ephemeral: true });
-      return interaction.editReply(
-        lang("RATIO")(guild.language, { string: "ERROR_CANNOT_FETCH_MESSAGE" })
+      await interaction.editReply(
+        lang("RATIO")(guild.language, { string: "ERROR_CANNOT_FETCH_MESSAGE_EMBED_TITLE" })
       );
+      return;
     }
 
     if (

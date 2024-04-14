@@ -27,7 +27,8 @@
     },
     {
       "NAME": "RATIO",
-      "ERROR_CANNOT_FETCH_MESSAGE": "> **❌ Unable to retrieve the message**\n- **Check if the ID or URL is correct.**\n- Check in the permissions if the bot can access to the channel.**\n- If you have indicated an ID for a message from another channel, you must set the channel where it is located.**.",
+      "ERROR_CANNOT_FETCH_MESSAGE_EMBED_TITLE": "**❌ Unable to retrieve the message**",
+      "ERROR_CANNOT_FETCH_MESSAGE_EMBED_DESCRIPTION": "- **Check if the ID or URL is correct.**\n- **Check in the permissions if the bot can access to the channel.**\n- **If you have indicated an ID for a message from another channel, you must set the channel where it is located.**.",
       "NO_CHANNEL_SEND_PERMISSION": "> **❌ You do not have permission to send messages in this channel.**",
       "NO_ADD_REACTIONS_PERMISSION": "> **❌ You do not have permission to add reactions to this message.**",
       "USER_ALREADY_RATIO": "> ❌ The [member]({targetMessage}) is already **RATIO** !",
@@ -47,6 +48,10 @@
     {
       "NAME": "BEAUTIFY",
       "TRY_ON_BOT": "I'm already beautiful, I don't need more :3"
+    },
+    {
+      "NAME": "RANDOM-NUMBER",
+      "RESPONSE": "**Here's your random number:** `{num}`"
     }
   ]
 }

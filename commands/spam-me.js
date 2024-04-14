@@ -3,11 +3,9 @@ const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
 const path = require("node:path");
 
-const command_name = path.basename(__filename).replace(".js", "");
-
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName(command_name)
+    .setName("spam-me")
     .setDescription("Te spam de mentions.")
     .setDescriptionLocalizations({
       "en-US": "Spams you with mentions.",

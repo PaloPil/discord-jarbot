@@ -27,7 +27,8 @@
     },
     {
       "NAME": "RATIO",
-      "ERROR_CANNOT_FETCH_MESSAGE": "> **❌ Impossible de récupérer le message**.\n- **Vérifiez si l'ID ou l'URL est correcte.**\n- **Vérifiez dans les permissions que le bot puisse accéder au salon.**\n- **Si vous avez indiqué un identifiant d'un message qui ne se trouve pas dans le salon actuel vous devez obligatoirement indiquer le salon où il se situe.**",
+      "ERROR_CANNOT_FETCH_MESSAGE_EMBED_TITLE": "> **❌ Impossible de récupérer le message**.",
+      "ERROR_CANNOT_FETCH_MESSAGE_EMBED_DESCRIPTION ": "- **Vérifiez si l'ID ou l'URL est correcte.**\n- **Vérifiez dans les permissions que le bot puisse accéder au salon.**\n- **Si vous avez indiqué un identifiant d'un message qui ne se trouve pas dans le salon actuel vous devez obligatoirement indiquer le salon où il se situe.**",
       "NO_CHANNEL_SEND_PERMISSION": "> **❌ Vous n'avez pas la permission d'envoyer des messages dans ce salon.**",
       "NO_ADD_REACTIONS_PERMISSION": "> **❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**",
       "USER_ALREADY_RATIO": "> ❌ Le [membre]({targetMessage}) est déjà **RATIO** !",
@@ -47,6 +48,10 @@
     {
       "NAME": "BEAUTIFY",
       "TRY_ON_BOT": "Je suis déjà très beau je n'ai pas besoin de + :3"
+    },
+    {
+      "NAME": "RANDOM-NUMBER",
+      "RESPONSE": "**Voici votre nombre aléatoire :** `{num}`"
     }
   ]
 }

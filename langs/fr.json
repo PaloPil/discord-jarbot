@@ -52,6 +52,12 @@
     {
       "NAME": "RANDOM-NUMBER",
       "RESPONSE": "**Voici votre nombre aléatoire :** `{num}`"
+    },
+    {
+      "NAME": "SPAM-ME",
+      "BEGIN_MESSAGE": "Etttt z'est partiiiii !",
+      "PING_MESSAGE": "<@{userid}>, c'est pour toi !",
+      "ENDING_MESSAGE": "Voili voilou !"
     }
   ]
 }

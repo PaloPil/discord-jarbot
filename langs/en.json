@@ -52,6 +52,12 @@
     {
       "NAME": "RANDOM-NUMBER",
       "RESPONSE": "**Here's your random number:** `{num}`"
+    },
+    {
+      "NAME": "SPAM-ME",
+      "BEGIN_MESSAGE": "And... here we goooo!",
+      "PING_MESSAGE": "Hey <@{userid}>!",
+      "ENDING_MESSAGE": "And voilà! It's done!"
     }
   ]
 }

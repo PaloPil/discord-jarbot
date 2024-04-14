@@ -26,8 +26,12 @@ module.exports = {
   async execute(interaction) {
     const nombre = interaction.options.getInteger("nombre") ?? 5;
 
+    const guild = await Guild.findOne({ id: interaction.guild.id });
+
     await interaction.reply({
-      content: "Etttt z'est partiiiii !",
+      content: lang("SPAM-ME")(guild.language, {
+        string: "BEGIN_MESSAGE"
+      }),
       ephemeral: true,
     });
 
@@ -35,14 +39,19 @@ module.exports = {
       if (num > 0) {
         setTimeout(() => {
           interaction.followUp({
-            content: `Hey <@${interaction.user.id}> !`,
+            content: lang("SPAM-ME")(guild.language, {
+              string: "PING_MESSAGE",
+              userid: interaction.user.id
+            }),
             ephemeral: true,
           });
           mention(num - 1);
         }, 756);
       } else {
         interaction.followUp({
-          content: "Voili voilou !",
+          content: lang("SPAM-ME")(guild.language, {
+            string: "ENDING_MESSAGE"
+          }),
           ephemeral: true,
         });
       }

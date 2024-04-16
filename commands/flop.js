@@ -67,7 +67,7 @@ module.exports = {
           gravity: "center",
         },
       ])
-      .toFile(tempFilePath)
+      .toFile(tempFilePath);
 
       await interaction.editReply({
         content: "**FLOP.**",

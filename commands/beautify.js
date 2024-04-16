@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-const Jimp = require("jimp");
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
@@ -64,22 +63,30 @@ module.exports = {
       );
     }
 
-    const avatarURL = user.displayAvatarURL({ size: 2048 });
-
-    const buffer = await imageDownload(avatarURL);
-
-    const imageBuffer = await sharp(buffer).png().toBuffer();
-
-    const image = await Jimp.read(imageBuffer);
-    const jar = await Jimp.read("./images/anotherjar.png");
-
-    image.resize(jar.bitmap.width, jar.bitmap.height);
-    jar.mask(image, 0, 0);
-
-    const finalBuffer = await jar.getBufferAsync(Jimp.MIME_PNG);
+    const avatarURL = user.displayAvatarURL({ size: 1024 });
+    const avatar = await imageDownload(avatarURL);
 
     const tempFilePath = path.join("./temp", `${uuidv4()}.png`);
-    await fs.promises.writeFile(tempFilePath, finalBuffer);
+
+    await sharp(avatar)
+      .resize(600, 600, {
+        fit: "cover",
+        position: "center",
+      })
+      .composite([
+        {
+          input: "./images/anotherjar.png",
+          gravity: "center",
+          blend: "multiply",
+        },
+        {
+          input: "./images/anotherjar.png",
+          gravity: "center",
+          blend: "dest-in",
+        }
+      ])
+      .greyscale()
+      .toFile(tempFilePath);
 
     await interaction.editReply({
       content: "**Jared.**",

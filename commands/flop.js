@@ -55,7 +55,7 @@ module.exports = {
 
     const tempFilePath = path.join("./temp", `${uuidv4()}.png`);
 
-    const image = await sharp(avatar)
+    await sharp(avatar)
       .resize(1024, 1024, {
         fit: "cover",
         position: "center",

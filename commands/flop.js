@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-const Jimp = require("jimp");
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
@@ -50,39 +49,35 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
 
-    const user = interaction.options.getUser("user") ?? interaction.user;
-    const avatarURL = user.displayAvatarURL({ size: 2048 });
-
-    const buffer = await imageDownload(avatarURL);
-
-    const imageBuffer = await sharp(buffer).png().toBuffer();
-
-    const image = await Jimp.read(imageBuffer);
-    const flop = await Jimp.read("./images/FLOP.png");
-
-    flop.resize(image.bitmap.width, Jimp.AUTO);
-
-    image.grayscale();
-
-    image.composite(flop, 0, 100, {
-      mode: Jimp.BLEND_SOURCE_OVER,
-      opacityDest: 1,
-      opacitySource: 1,
-    });
-
-    const finalBuffer = await image.getBufferAsync(Jimp.MIME_PNG);
+    const user = await interaction.options.getUser("utilisateur") ?? interaction.user;
+    const avatarURL = user.displayAvatarURL({ size: 1024 });
+    const avatar = await imageDownload(avatarURL);
 
     const tempFilePath = path.join("./temp", `${uuidv4()}.png`);
-    await fs.promises.writeFile(tempFilePath, finalBuffer);
 
-    await interaction.editReply({
-      content: "**FLOP.**",
-      files: [tempFilePath],
-    });
+    const image = await sharp(avatar)
+      .resize(1024, 1024, {
+        fit: "cover",
+        position: "center",
+      })
+      .greyscale()
+      .composite([
+        {
+          input: "./images/FLOP.png",
+          gravity: "center",
+        },
+      ])
+      .toFile(tempFilePath)
 
-    fs.unlink(tempFilePath, (err) => {
-      if (err) console.error("Error deleting temporary file:", err);
-    });
+      await interaction.editReply({
+        content: "**FLOP.**",
+        files: [tempFilePath],
+      });
+
+      fs.unlink(tempFilePath, (err) => {
+        if (err) console.error("Error deleting temporary file:", err);
+      });
+
   },
   cooldown: 15,
   inRandomCommand: true,

@@ -33,7 +33,8 @@
       "NO_ADD_REACTIONS_PERMISSION": "> **❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**",
       "USER_ALREADY_RATIO": "> ❌ Le [membre]({targetMessage}) est déjà **RATIO** !",
       "USER_SUCCESS_RATIO": "> ✅ Le [membre]({targetMessage}) s'est fait **RATIO** !",
-      "USER_CANNOT_BE_RATIO": "> ❌ Le [membre]({targetMessage}) ne peut pas être **RATIO** !"
+      "USER_CANNOT_BE_RATIO": "> ❌ Le [membre]({targetMessage}) ne peut pas être **RATIO** !",
+      "USER_IMUNE_RATIO": "> ❌ Le [membre]({targetMessage}) est immunisé contre le **RATIO** !"
     },
     {
       "NAME": "SUM",

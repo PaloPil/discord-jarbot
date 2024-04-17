@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("discord.js");
 const BlaguesAPI = require("blagues-api");
 const blagues = new BlaguesAPI(process.env.BLAGUETOKEN);
 
-/* En réalité les types de blagues sont : 
+/* En réalité les types de blagues sont :
     global, dev, dark, limit, beauf, blondes
    mais j'ai retiré ici les blagues limites (+18) et dark (humour noir) étant donnés leur nature.
 */

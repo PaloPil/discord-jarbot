@@ -67,16 +67,13 @@ Then in the answer, put the arguments to be changed under {}.
 # Exemple de commande
 
 ```js
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const path = require("node:path");
+const { SlashCommandBuilder } = require("discord.js");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
 
-const command_name = path.basename(__filename).replace(".js", "");
-
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName(command_name)
+    .setName("command")
     .setDescription("Description de la commande ici.")
     .setDescriptionLocalizations({
       "en-US": "English translation of description",
@@ -128,6 +125,7 @@ module.exports = {
     );
   },
   inRandomCommand: false, // Paramètre qui décide si oui ou non la commande peut être déclenché par la commande /random
+  needRefresh: true, // Paramètre qui décide si oui ou non il y aura un refresh des données sur le serveur de la base de données avant de faire la commande. Pour éviter d'avoir des informations obsolètes, nécessaire pour certains cas spécifiques.
   cooldown: 10, // EN SECONDES, si il n'y pas l'option : 5 secondes par défaut
 };
 ```

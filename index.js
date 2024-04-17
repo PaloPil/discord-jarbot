@@ -1,6 +1,5 @@
 require("dotenv").config();
 require("proto-tools");
-const base64 = require("base-64");
 const {
   Client,
   Collection,
@@ -8,7 +7,7 @@ const {
   REST,
   Routes,
 } = require("discord.js");
-const mongoose = require("mongoose");
+const { connect } = require("mongoose");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -21,8 +20,7 @@ const db = `mongodb+srv://${process.env.DBUSERNAME}:${encodeURIComponent(
   process.env.DBPASSWORD
 )}${process.env.MONGOURI}`;
 
-mongoose
-  .connect(db)
+connect(db)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
@@ -69,7 +67,7 @@ const rest = new REST().setToken(process.env.TOKEN);
 
     const data = await rest.put(
       Routes.applicationCommands(
-        base64.decode(process.env.TOKEN.split(".")[0])
+        process.env.TOKEN.split(".")[0].decodeBase64()
       ),
       {
         body: commands,

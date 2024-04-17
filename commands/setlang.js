@@ -37,16 +37,19 @@ module.exports = {
       { new: true }
     );
 
+    let ephemeral;
     if (guild) {
-      await interaction.deferReply();
-      const success = lang("SETLANG")(guild.language, { string: "SUCCESS" });
-      interaction.editReply(success);
+      ephemeral = false;
     } else {
-      await interaction.deferReply({ ephemeral: true });
-      const failed = lang("SETLANG")(guild.language, { string: "FAILED" });
-      interaction.editReply(failed);
+      ephemeral = true;
     }
+    const response = lang("SETLANG")(guild.language, {
+      string: ephemeral ? "FAILED" : "SUCCESS",
+    });
+
+    interaction.reply({ content: response, ephemeral: ephemeral });
   },
   cooldown: 0,
+  needRefresh: false,
   inRandomCommand: false,
 };

@@ -60,8 +60,14 @@ module.exports = {
       }
     } catch (error) {
       await interaction.deferReply({ ephemeral: true });
+
       await interaction.editReply(
-        lang("RATIO")(guild.language, { string: "ERROR_CANNOT_FETCH_MESSAGE_EMBED_TITLE" })
+        lang("RATIO")(guild.language, {
+          string: "ERROR_CANNOT_FETCH_MESSAGE_EMBED_TITLE",
+        }) +
+          `\n${await lang("RATIO")(guild.language, {
+            string: "ERROR_CANNOT_FETCH_MESSAGE_EMBED_DESCRIPTION",
+          })}`
       );
       return;
     }
@@ -105,34 +111,15 @@ module.exports = {
       }
     }
 
-    if (allPresent) {
-      await interaction.deferReply({ ephemeral: true });
-      return interaction.editReply(
-        lang("RATIO")(guild.language, {
-          string: "USER_ALREADY_RATIO",
-          targetMessage: targetMessage.url,
-        })
-      );
-    } else {
-      try {
-        await Promise.all(toReact.map((emoji) => targetMessage.react(emoji)));
-        await interaction.deferReply();
-        return interaction.channel.send(
-          lang("RATIO")(guild.language, {
-            string: "USER_SUCCESS_RATIO",
-            targetMessage: targetMessage.url,
-          })
-        );
-      } catch (error) {
-        await interaction.deferReply({ ephemeral: true });
-        return interaction.editReply(
-          lang("RATIO")(guild.language, {
-            string: "USER_CANNOT_BE_RATIO",
-            targetMessage: targetMessage.url,
-          })
-        );
-      }
-    }
+    const response = await lang("RATIO")(guild.language, {
+      string: allPresent ? "USER_ALREADY_RATIO" : "USER_SUCCESS_RATIO",
+      targetMessage: targetMessage.url,
+    });
+
+    await interaction.reply({
+      content: response,
+      ephemeral: allPresent,
+    });
   },
   cooldown: 10,
   inRandomCommand: false,

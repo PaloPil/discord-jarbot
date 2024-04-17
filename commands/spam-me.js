@@ -1,7 +1,6 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
-const path = require("node:path");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,7 +29,7 @@ module.exports = {
 
     await interaction.reply({
       content: lang("SPAM-ME")(guild.language, {
-        string: "BEGIN_MESSAGE"
+        string: "BEGIN_MESSAGE",
       }),
       ephemeral: true,
     });
@@ -41,7 +40,7 @@ module.exports = {
           interaction.followUp({
             content: lang("SPAM-ME")(guild.language, {
               string: "PING_MESSAGE",
-              userid: interaction.user.id
+              userid: interaction.user.id,
             }),
             ephemeral: true,
           });
@@ -50,7 +49,7 @@ module.exports = {
       } else {
         interaction.followUp({
           content: lang("SPAM-ME")(guild.language, {
-            string: "ENDING_MESSAGE"
+            string: "ENDING_MESSAGE",
           }),
           ephemeral: true,
         });

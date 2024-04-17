@@ -1,9 +1,6 @@
-const { SlashCommandBuilder } = require("discord.js");
-const fs = require("fs");
-const path = require("path");
+const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const sharp = require("sharp");
 const https = require("https");
-const { v4: uuidv4 } = require("uuid");
 
 const imageDownload = (url) => {
   if (!(url && /^https?:\/\/[^ ]+$/.test(url)))
@@ -36,26 +33,57 @@ module.exports = {
     })
     .addUserOption((option) =>
       option
-        .setName("utilisateur")
+        .setName("user")
         .setNameLocalizations({
-          "en-US": "user",
+          fr: "utilisateur",
         })
         .setDescription("L'utilisateur qui a FLOP")
         .setDescriptionLocalizations({
           "en-US": "The used that FLOP",
         })
         .setRequired(false)
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("server-pfp")
+        .setNameLocalizations({
+          fr: "pp-serveur",
+        })
+        .setDescription(
+          "Utiliser la photo de profil sur le serveur plutôt que celle du profil"
+        )
+        .setDescriptionLocalizations({
+          "en-US": "Use user's server profile picture rather than profile one",
+        })
+        .setRequired(false)
     ),
+
   async execute(interaction) {
     await interaction.deferReply();
 
-    const user = await interaction.options.getUser("utilisateur") ?? interaction.user;
-    const avatarURL = user.displayAvatarURL({ size: 1024 });
+    const user =
+      (await interaction.options.getUser("user")) ?? interaction.user;
+    const serverpfp = interaction.options.getBoolean("server-pfp");
+
+    if (user.id == interaction.client.user.id) {
+      return interaction.editReply(
+        lang("FLOP")(guild.language, { string: "THE_JAR_CANT_FLOP" })
+      );
+    }
+
+    const guildTarget = await interaction.guild.members.fetch(user);
+
+    let avatarURL;
+
+    if (serverpfp) {
+      avatarURL = guildTarget.displayAvatarURL({ size: 2048 });
+    } else {
+      avatarURL = user.displayAvatarURL({ size: 2048 });
+    }
+
     const avatar = await imageDownload(avatarURL);
 
-    const tempFilePath = path.join("./temp", `${uuidv4()}.png`);
-
-    await sharp(avatar)
+    const buffer = await sharp(avatar)
       .resize(1024, 1024, {
         fit: "cover",
         position: "center",
@@ -67,17 +95,16 @@ module.exports = {
           gravity: "center",
         },
       ])
-      .toFile(tempFilePath);
+      .toBuffer();
 
-      await interaction.editReply({
-        content: "**FLOP.**",
-        files: [tempFilePath],
-      });
+    const file = new AttachmentBuilder(buffer, {
+      name: `FLOP_${interaction.user.id}.png`,
+    });
 
-      fs.unlink(tempFilePath, (err) => {
-        if (err) console.error("Error deleting temporary file:", err);
-      });
-
+    await interaction.editReply({
+      content: "**FLOP.**",
+      files: [file],
+    });
   },
   cooldown: 15,
   inRandomCommand: true,

@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const path = require("node:path");
+const { SlashCommandBuilder } = require("discord.js");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
 

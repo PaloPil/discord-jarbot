@@ -1,9 +1,6 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const path = require("node:path");
+const { SlashCommandBuilder } = require("discord.js");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
-
-const command_name = path.basename(__filename).replace(".js", "");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -37,10 +34,12 @@ module.exports = {
       num *= 10;
     }
 
-    await interaction.reply(lang("RANDOM-NUMBER")(guild.language, {
-      string: "RESPONSE",
-      num: num
-    }));
+    await interaction.reply(
+      lang("RANDOM-NUMBER")(guild.language, {
+        string: "RESPONSE",
+        num: num,
+      })
+    );
   },
   cooldown: 0,
   inRandomCommand: true,

@@ -131,6 +131,8 @@ module.exports = {
       targetMessage: targetMessage.url,
     });
 
+    toReact.map((emoji) => targetMessage.react(emoji));
+
     await interaction.reply({
       content: response,
       ephemeral: allPresent,

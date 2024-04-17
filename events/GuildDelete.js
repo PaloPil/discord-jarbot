@@ -11,7 +11,9 @@ module.exports = {
         { new: true }
       );
 
-      console.log(`Serveur supprimé de la base de données : ${guild.name}`);
+      console.log(
+        `Serveur supprimé de la base de données : ${guild.name} (${guild.id})`
+      );
     } catch (error) {
       console.error(
         "Erreur lors de la mise à jour du serveur dans la base de données :",

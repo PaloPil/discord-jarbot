@@ -1,9 +1,6 @@
-const { SlashCommandBuilder } = require("discord.js");
-const fs = require("fs");
-const path = require("path");
+const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const sharp = require("sharp");
 const https = require("https");
-const { v4: uuidv4 } = require("uuid");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
 
@@ -50,11 +47,27 @@ module.exports = {
           "en-US": "The user to beautify!",
         })
         .setRequired(false)
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("server-pfp")
+        .setNameLocalizations({
+          fr: "pp-serveur",
+        })
+        .setDescription(
+          "Utiliser la photo de profil sur le serveur plutôt que celle du profil"
+        )
+        .setDescriptionLocalizations({
+          "en-US": "Use user's server profile picture rather than profile one",
+        })
+        .setRequired(false)
     ),
   async execute(interaction) {
     await interaction.deferReply();
 
     const user = interaction.options.getUser("user") ?? interaction.user;
+    const serverpfp = interaction.options.getBoolean("server-pfp");
+
     const guild = await Guild.findOne({ id: interaction.guild.id });
 
     if (user.id == interaction.client.user.id) {
@@ -63,12 +76,19 @@ module.exports = {
       );
     }
 
-    const avatarURL = user.displayAvatarURL({ size: 1024 });
+    const guildTarget = await interaction.guild.members.fetch(user);
+
+    let avatarURL;
+
+    if (serverpfp) {
+      avatarURL = guildTarget.displayAvatarURL({ size: 2048 });
+    } else {
+      avatarURL = user.displayAvatarURL({ size: 2048 });
+    }
+
     const avatar = await imageDownload(avatarURL);
 
-    const tempFilePath = path.join("./temp", `${uuidv4()}.png`);
-
-    await sharp(avatar)
+    const buffer = await sharp(avatar)
       .resize(600, 600, {
         fit: "cover",
         position: "center",
@@ -83,18 +103,18 @@ module.exports = {
           input: "./images/anotherjar.png",
           gravity: "center",
           blend: "dest-in",
-        }
+        },
       ])
       .greyscale()
-      .toFile(tempFilePath);
+      .toBuffer();
+
+    const file = new AttachmentBuilder(buffer, {
+      name: `Jared_${interaction.user.id}.png`,
+    });
 
     await interaction.editReply({
       content: "**Jared.**",
-      files: [tempFilePath],
-    });
-
-    fs.unlink(tempFilePath, (err) => {
-      if (err) console.error("Error deleting temporary file:", err);
+      files: [file],
     });
   },
   cooldown: 10,

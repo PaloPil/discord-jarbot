@@ -1,4 +1,5 @@
 const { Events, Collection } = require("discord.js");
+const Guild = require("../utils/Guild");
 
 module.exports = {
   name: Events.InteractionCreate,
@@ -41,6 +42,24 @@ module.exports = {
 
     timestamps.set(interaction.user.id, now);
     setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+
+    let guild = await interaction.guild;
+    let ownerId = await guild.ownerId;
+
+    let needRefresh = command.needRefresh;
+    if (!needRefresh) {
+      needRefresh = false;
+    } else {
+      await Guild.findOneAndUpdate(
+        { id: guild.id },
+        {
+          name: guild.name,
+          available: true,
+          ownerId: ownerId,
+        },
+        { new: true, upsert: true }
+      );
+    }
 
     try {
       await command.execute(interaction);

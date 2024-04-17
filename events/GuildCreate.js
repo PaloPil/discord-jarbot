@@ -7,11 +7,14 @@ module.exports = {
     try {
       const existingGuild = await Guild.findOne({ id: guild.id });
 
+      const ownerId = await guild.ownerId;
+
       if (!existingGuild) {
         const newGuild = new Guild({
           id: guild.id,
           name: guild.name,
           language: "fr",
+          ownerId: ownerId,
         });
 
         await newGuild.save();
@@ -19,7 +22,9 @@ module.exports = {
           `Nouveau serveur ajouté à la base de données : ${guild.name}`
         );
       } else {
+        existingGuild.name = guild.name;
         existingGuild.available = true;
+        existingGuild.ownerId = ownerId;
         await existingGuild.save();
         console.log(`Serveur réintégré à la base de données : ${guild.name}`);
       }

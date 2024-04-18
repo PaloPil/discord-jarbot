@@ -59,6 +59,10 @@
       "BEGIN_MESSAGE": "Etttt z'est partiiiii !",
       "PING_MESSAGE": "<@{userid}>, c'est pour toi !",
       "ENDING_MESSAGE": "Voili voilou !"
+    },
+    {
+      "NAME": "FLOP",
+      "THE_JAR_CANT_FLOP": "❌ Je ne peux pas **FLOP**, je suis un pot !"
     }
   ]
 }

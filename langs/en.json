@@ -59,6 +59,10 @@
       "BEGIN_MESSAGE": "And... here we goooo!",
       "PING_MESSAGE": "Hey <@{userid}>!",
       "ENDING_MESSAGE": "And voilà! It's done!"
+    },
+    {
+      "NAME": "FLOP",
+      "THE_JAR_CANT_FLOP": "I can't **FLOP**, I'm a jar!"
     }
   ]
 }

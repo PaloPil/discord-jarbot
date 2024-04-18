@@ -38,7 +38,19 @@
     },
     {
       "NAME": "SUM",
-      "RESPONSES": ["42", "∞", "Eleventy-four", "-1/12", "π", "404", "The result", "China", "299,792,458 m/s", "9.81", "i"]
+      "RESPONSES": [
+        "42",
+        "∞",
+        "Eleventy-four",
+        "-1/12",
+        "π",
+        "404",
+        "The result",
+        "China",
+        "299,792,458 m/s",
+        "9.81",
+        "i"
+      ]
     },
     {
       "NAME": "SUGGEST",
@@ -62,7 +74,7 @@
     },
     {
       "NAME": "FLOP",
-      "THE_JAR_CANT_FLOP": "I can't **FLOP**, I'm a jar!"
+      "THE_JAR_CANT_FLOP": "❌ I can't **FLOP**, I'm a jar!"
     }
   ]
 }

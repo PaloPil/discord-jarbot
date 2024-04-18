@@ -1,6 +1,8 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const sharp = require("sharp");
 const https = require("https");
+const Guild = require("../utils/Guild.js");
+const lang = require("../utils/language.js");
 
 const imageDownload = (url) => {
   if (!(url && /^https?:\/\/[^ ]+$/.test(url)))
@@ -60,6 +62,8 @@ module.exports = {
 
   async execute(interaction) {
     await interaction.deferReply();
+
+    const guild = await Guild.findOne({ id: interaction.guild.id });
 
     const user =
       (await interaction.options.getUser("user")) ?? interaction.user;

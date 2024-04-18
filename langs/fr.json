@@ -33,11 +33,12 @@
       "NO_ADD_REACTIONS_PERMISSION": "> **❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**",
       "USER_ALREADY_RATIO": "> ❌ Le [membre]({targetMessage}) est déjà **RATIO** !",
       "USER_SUCCESS_RATIO": "> ✅ Le [membre]({targetMessage}) s'est fait **RATIO** !",
-      "USER_CANNOT_BE_RATIO": "> ❌ Le [membre]({targetMessage}) ne peut pas être **RATIO** !"
+      "USER_CANNOT_BE_RATIO": "> ❌ Le [membre]({targetMessage}) ne peut pas être **RATIO** !",
+      "USER_IMUNE_RATIO": "> ❌ Le [membre]({targetMessage}) est immunisé contre le **RATIO** !"
     },
     {
       "NAME": "SUM",
-      "RESPONSES": ["42", "∞", "Quarante-douze"]
+      "RESPONSES": ["42", "∞", "Quarante-douze", "-1/12", "π", "L'Australie", "404", "Le résultat", "299 792 458 m/s", "9,81", "i"]
     },
     {
       "NAME": "SUGGEST",
@@ -58,6 +59,10 @@
       "BEGIN_MESSAGE": "Etttt z'est partiiiii !",
       "PING_MESSAGE": "<@{userid}>, c'est pour toi !",
       "ENDING_MESSAGE": "Voili voilou !"
+    },
+    {
+      "NAME": "FLOP",
+      "THE_JAR_CANT_FLOP": "❌ Je ne peux pas **FLOP**, je suis un pot !"
     }
   ]
 }

@@ -33,11 +33,12 @@
       "NO_ADD_REACTIONS_PERMISSION": "> **❌ You do not have permission to add reactions to this message.**",
       "USER_ALREADY_RATIO": "> ❌ The [member]({targetMessage}) is already **RATIO** !",
       "USER_SUCCESS_RATIO": "> ✅ The [member]({targetMessage}) has been **RATIO** !",
-      "USER_CANNOT_BE_RATIO": "> ❌ The [member]({targetMessage}) cannot be **RATIO** !"
+      "USER_CANNOT_BE_RATIO": "> ❌ The [member]({targetMessage}) cannot be **RATIO** !",
+      "USER_IMUNE_RATIO": "> ❌ The [member]({targetMessage}) is immune to **RATIO** !"
     },
     {
       "NAME": "SUM",
-      "RESPONSES": ["42", "∞"]
+      "RESPONSES": ["42", "∞", "Eleventy-four", "-1/12", "π", "404", "The result", "China", "299,792,458 m/s", "9.81", "i"]
     },
     {
       "NAME": "SUGGEST",
@@ -58,6 +59,10 @@
       "BEGIN_MESSAGE": "And... here we goooo!",
       "PING_MESSAGE": "Hey <@{userid}>!",
       "ENDING_MESSAGE": "And voilà! It's done!"
+    },
+    {
+      "NAME": "FLOP",
+      "THE_JAR_CANT_FLOP": "I can't **FLOP**, I'm a jar!"
     }
   ]
 }

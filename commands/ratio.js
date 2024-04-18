@@ -2,9 +2,9 @@ const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
 
-const imuneUsers = [
+const immuneUsers = [
   "763337508175216641", // PaloPil
-  "525729900670222337" // Zaxerone
+  "525729900670222337", // Zaxerone
 ];
 
 module.exports = {
@@ -39,7 +39,8 @@ module.exports = {
     const guild = await Guild.findOne({ id: interaction.guild.id });
 
     const message = await interaction.options.getString("message");
-    let channel = interaction.options.getChannel("channel") ?? interaction.channel;
+    let channel =
+      interaction.options.getChannel("channel") ?? interaction.channel;
 
     let messageId;
     let channelId;
@@ -104,14 +105,16 @@ module.exports = {
       return;
     }
 
-    if (imuneUsers.includes(interaction.user.id.toString())) {
+    if (immuneUsers.includes(interaction.user.id.toString())) {
       await interaction.deferReply({ ephemeral: true });
       await interaction.editReply(
-        lang("RATIO")(guild.language, { string: "USER_IMUNE_RATIO" })
+        lang("RATIO")(guild.language, {
+          string: "USER_IMMUNE_RATIO",
+          targetMessage: targetMessage.url,
+        })
       );
       return;
     }
-
 
     let reactions = targetMessage.reactions.cache.map(
       (reaction) => reaction._emoji.name

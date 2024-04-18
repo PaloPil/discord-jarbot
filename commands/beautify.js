@@ -30,21 +30,21 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("beautify")
     .setNameLocalizations({
-      fr: "embellir",
+      "fr": "embellir",
     })
-    .setDescription("Rend une photo de profil plus belle !")
+    .setDescription("Make a profile picture more beautiful!")
     .setDescriptionLocalizations({
-      "en-US": "Make a profile picture more beautiful!",
+      "fr": "Rend une photo de profil plus belle !",
     })
     .addUserOption((option) =>
       option
         .setName("user")
         .setNameLocalizations({
-          fr: "utilisateur",
+          "fr": "utilisateur",
         })
-        .setDescription("L'utilisateur à embellir !")
+        .setDescription("The user to beautify!")
         .setDescriptionLocalizations({
-          "en-US": "The user to beautify!",
+          "fr": "L'utilisateur à embellir !",
         })
         .setRequired(false)
     )
@@ -52,13 +52,13 @@ module.exports = {
       option
         .setName("server-pfp")
         .setNameLocalizations({
-          fr: "pp-serveur",
+          "fr": "pp-serveur",
         })
         .setDescription(
-          "Utiliser la photo de profil sur le serveur plutôt que celle du profil"
+          "Use user's server profile picture rather than profile one"
         )
         .setDescriptionLocalizations({
-          "en-US": "Use user's server profile picture rather than profile one",
+          "fr": "Utiliser la photo de profil sur le serveur plutôt que celle du profil",
         })
         .setRequired(false)
     ),
@@ -66,7 +66,7 @@ module.exports = {
     await interaction.deferReply();
 
     const user = interaction.options.getUser("user") ?? interaction.user;
-    const serverpfp = interaction.options.getBoolean("server-pfp");
+    const serverpfp = interaction.options.getBoolean("server-pfp") ?? false;
 
     const guild = await Guild.findOne({ id: interaction.guild.id });
 
@@ -76,14 +76,12 @@ module.exports = {
       );
     }
 
-    const guildTarget = await interaction.guild.members.fetch(user);
-
     let avatarURL;
-
     if (serverpfp) {
-      avatarURL = guildTarget.displayAvatarURL({ size: 2048 });
+      const guildTarget = await interaction.guild.members.fetch(user);
+      avatarURL = guildTarget.displayAvatarURL({ size: 1024 });
     } else {
-      avatarURL = user.displayAvatarURL({ size: 2048 });
+      avatarURL = user.displayAvatarURL({ size: 1024 });
     }
 
     const avatar = await imageDownload(avatarURL);
@@ -105,12 +103,12 @@ module.exports = {
           blend: "dest-in",
         },
       ])
-      .greyscale()
       .toBuffer();
 
-    const file = new AttachmentBuilder(buffer, {
-      name: `Jared_${interaction.user.id}.png`,
-    });
+    const file = new AttachmentBuilder(
+      buffer,
+      { name: `Jared_${interaction.user.id}.png` }
+    );
 
     await interaction.editReply({
       content: "**Jared.**",

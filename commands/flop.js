@@ -29,19 +29,19 @@ const imageDownload = (url) => {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("flop")
-    .setDescription("Donne une certification de FLOP")
+    .setDescription("Provides FLOP certification")
     .setDescriptionLocalizations({
-      "en-US": "Provides FLOP certification",
+      "fr": "Donne une certification de FLOP",
     })
     .addUserOption((option) =>
       option
         .setName("user")
         .setNameLocalizations({
-          fr: "utilisateur",
+          "fr": "utilisateur",
         })
-        .setDescription("L'utilisateur qui a FLOP")
+        .setDescription("The used that FLOPed")
         .setDescriptionLocalizations({
-          "en-US": "The used that FLOP",
+          "fr": "L'utilisateur qui a FLOP",
         })
         .setRequired(false)
     )
@@ -49,13 +49,13 @@ module.exports = {
       option
         .setName("server-pfp")
         .setNameLocalizations({
-          fr: "pp-serveur",
+          "fr": "pp-serveur",
         })
         .setDescription(
-          "Utiliser la photo de profil sur le serveur plutôt que celle du profil"
+          "Use user's server profile picture rather than profile one"
         )
         .setDescriptionLocalizations({
-          "en-US": "Use user's server profile picture rather than profile one",
+          "fr": "Utiliser la photo de profil sur le serveur plutôt que celle du profil",
         })
         .setRequired(false)
     ),
@@ -65,9 +65,8 @@ module.exports = {
 
     const guild = await Guild.findOne({ id: interaction.guild.id });
 
-    const user =
-      (await interaction.options.getUser("user")) ?? interaction.user;
-    const serverpfp = interaction.options.getBoolean("server-pfp");
+    const user = (await interaction.options.getUser("user")) ?? interaction.user;
+    const serverpfp = interaction.options.getBoolean("server-pfp") ?? false;
 
     if (user.id == interaction.client.user.id) {
       return interaction.editReply(
@@ -80,9 +79,9 @@ module.exports = {
     let avatarURL;
 
     if (serverpfp) {
-      avatarURL = guildTarget.displayAvatarURL({ size: 2048 });
+      avatarURL = guildTarget.displayAvatarURL({ size: 1024 });
     } else {
-      avatarURL = user.displayAvatarURL({ size: 2048 });
+      avatarURL = user.displayAvatarURL({ size: 1024 });
     }
 
     const avatar = await imageDownload(avatarURL);
@@ -101,9 +100,10 @@ module.exports = {
       ])
       .toBuffer();
 
-    const file = new AttachmentBuilder(buffer, {
-      name: `FLOP_${interaction.user.id}.png`,
-    });
+    const file = new AttachmentBuilder(
+      buffer,
+      { name: `FLOP_${interaction.user.id}.png` }
+    );
 
     await interaction.editReply({
       content: "**FLOP.**",

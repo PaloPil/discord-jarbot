@@ -46,10 +46,7 @@ module.exports = {
     let guild = await interaction.guild;
     let ownerId = await guild.ownerId;
 
-    let needRefresh = command.needRefresh;
-    if (!needRefresh) {
-      needRefresh = false;
-    } else {
+    if (command.needRefresh) {
       await Guild.findOneAndUpdate(
         { id: guild.id },
         {

@@ -132,6 +132,7 @@ dist
 
 # Lock files
 package-lock.json
+pnpm-lock.yaml
 
 # Docker files (Just testing for now, it's not sure to be added)
 compose.yaml

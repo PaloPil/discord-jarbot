@@ -12,7 +12,19 @@ function lang(commandName) {
   const enData = require("../langs/en.json");
 
   return function (language, args) {
-    const langData = language === "fr" ? frData : enData;
+
+    let langData;
+    switch (language) {
+      case "fr":
+        langData = frData;
+        break;
+      case "en":
+        langData = enData;
+        break;
+      default:
+        langData = enData;
+        break;
+    }
 
     const command = langData.COMMANDS.find((cmd) => cmd.NAME === commandName);
 

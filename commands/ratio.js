@@ -16,7 +16,7 @@ module.exports = {
         .setDescriptionLocalizations({
           "en-US": "Message ID or link",
         })
-        .setRequired(false)
+        .setRequired(true)
     )
     .addChannelOption((option) =>
       option
@@ -62,12 +62,13 @@ module.exports = {
       await interaction.deferReply({ ephemeral: true });
 
       await interaction.editReply(
-        lang("RATIO")(guild.language, {
+        `${lang("RATIO")(guild.language, {
           string: "ERROR_CANNOT_FETCH_MESSAGE_EMBED_TITLE",
-        }) +
-          `\n${await lang("RATIO")(guild.language, {
-            string: "ERROR_CANNOT_FETCH_MESSAGE_EMBED_DESCRIPTION",
-          })}`
+        })}
+        \n
+        ${await lang("RATIO")(guild.language, {
+          string: "ERROR_CANNOT_FETCH_MESSAGE_EMBED_DESCRIPTION",
+        })}`
       );
       return;
     }

@@ -67,17 +67,3 @@ module.exports = {
   cooldown: 0,
   inRandomCommand: true,
 };
-
-function meowify(message) {
-  message = message.toLowerCase();
-
-  message = message.replace(" ", " meow ");
-
-  for (let i = 0; i < message.length; i++) {
-    if (message[i] === " ") {
-      continue;
-    }
-    message = message.replace(message[i], "meow" + message[i]);
-  }
-  return message;
-}

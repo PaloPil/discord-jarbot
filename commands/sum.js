@@ -35,8 +35,8 @@ module.exports = {
     const guild = await Guild.findOne({ id: interaction.guild.id });
     const reponses = lang("SUM")(guild.language, { string: "RESPONSES" });
 
-    const n1 = interaction.options.getInteger("a");
-    const n2 = interaction.options.getInteger("b");
+    const n1 = interaction.options.getInteger("a") ?? 42;
+    const n2 = interaction.options.getInteger("b") ?? 42;
 
     await interaction.reply(
       `\`${n1}\` ${n2 >= 0 ? "+" : "-"} \`${
@@ -45,5 +45,5 @@ module.exports = {
     );
   },
   cooldown: 0,
-  inRandomCommand: false,
+  inRandomCommand: true,
 };

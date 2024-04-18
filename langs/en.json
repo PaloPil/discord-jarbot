@@ -7,7 +7,7 @@
     },
     {
       "NAME": "COLORDECIMAL",
-      "ERROR_INCORRECT_CODE": "Please provides a correct hex color",
+      "ERROR_INCORRECT_CODE": "❌ **Please provides a correct hex color.**",
       "EMBED_TITLE": "Here is the result!",
       "EMBED_DESCRIPTION": "**Hex color :** `{hexColor}`\n➡️ **Decimal color :** `{decimalColor}`"
     },
@@ -43,7 +43,7 @@
       "NAME": "SUGGEST",
       "EMBED_TITLE": "Your suggestion has been sent!",
       "EMBED_DESCRIPTION": "**Thanks for your suggestion!**",
-      "ERROR_CANNOT_SEND_SUGGEST": "❌ **An error occured while sending the suggestion, please retry or contact the support.**"
+      "ERROR_CANNOT_SEND_SUGGEST": "❌ **An error occured while sending the suggestion, please retry or contact support.**"
     },
     {
       "NAME": "BEAUTIFY",

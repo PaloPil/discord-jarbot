@@ -38,7 +38,7 @@
     },
     {
       "NAME": "SUM",
-      "RESPONSES": ["42", "∞", "Quarante-douze"]
+      "RESPONSES": ["42", "∞", "Quarante-douze", "-1/12", "π", "L'Australie", "404", "Le résultat", "299 792 458 m/s", "9,81", "i"]
     },
     {
       "NAME": "SUGGEST",

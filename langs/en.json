@@ -38,7 +38,7 @@
     },
     {
       "NAME": "SUM",
-      "RESPONSES": ["42", "∞"]
+      "RESPONSES": ["42", "∞", "Eleventy-four", "-1/12", "π", "404", "The result", "China", "299,792,458 m/s", "9.81", "i"]
     },
     {
       "NAME": "SUGGEST",

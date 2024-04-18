@@ -14,7 +14,7 @@ module.exports = {
       value,
     }));
     const randomableCommands = commandsArray.filter(function (v) {
-      return v.value.inRandomCommand;
+      return v.value.inRandomCommand ?? false;
     });
     const selectedCommand = randomableCommands.random();
     selectedCommand.value.execute(interaction);

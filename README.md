@@ -1,3 +1,5 @@
+Switch to the [French version](README_fr.md)
+
 # JARBot
 
 **J**ust **A** **R**andom **Bot** - JARBot is just a random discord bot with some random commands, made with javascript *(and not with Java like the name could suggest)*.

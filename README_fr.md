@@ -19,5 +19,4 @@ echo "TOKEN=" >> .env && echo "BLAGUETOKEN=" >> .env && echo "DBUSERNAME=" >> .e
 
 > ❗ Vous devez changer les détails de votre **`.env`** par votre [token de bot discord](https://discord.com/developers/applications), [token Blagues-API](https://www.blagues-api.fr/), et vos [détails MongoDB](https://www.mongodb.com)
 
-> 💡 The **`MONGOURI`** env variable is what comes after the `@` in your MongoDB URI
 > 💡 La variable d'environnement **`MONGOURI`** est ce qui suit le `@` dans votre URI MongoDB

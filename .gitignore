@@ -142,6 +142,7 @@ README.Docker.md
 
 # VSCode
 .vscode/
+.VSCodeCounter
 
 # Test command
 test.txt

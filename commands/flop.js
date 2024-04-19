@@ -94,7 +94,7 @@ module.exports = {
       .greyscale()
       .composite([
         {
-          input: "./images/FLOP.png",
+          input: "./assets/images/FLOP.png",
           gravity: "center",
         },
       ])

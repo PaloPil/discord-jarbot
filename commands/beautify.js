@@ -93,12 +93,12 @@ module.exports = {
       })
       .composite([
         {
-          input: "./images/anotherjar.png",
+          input: "./assets/images/jar.png",
           gravity: "center",
           blend: "multiply",
         },
         {
-          input: "./images/anotherjar.png",
+          input: "./assets/images/jar.png",
           gravity: "center",
           blend: "dest-in",
         },

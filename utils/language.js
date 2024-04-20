@@ -12,7 +12,6 @@ function lang(commandName) {
   const enData = require("../langs/en.json");
 
   return function (language, args) {
-
     let langData;
     switch (language) {
       case "fr":

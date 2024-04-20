@@ -2,11 +2,6 @@ const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
 
-const immuneUsers = [
-  "763337508175216641", // PaloPil
-  "525729900670222337", // Zaxerone
-];
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ratio")
@@ -42,6 +37,7 @@ module.exports = {
     let channel =
       interaction.options.getChannel("channel") ?? interaction.channel;
 
+    const immuneUsers = interaction.client.immuneUsers;
     let messageId;
     let channelId;
 
@@ -56,6 +52,7 @@ module.exports = {
     let targetMessage;
     let targetChannel;
 
+    /* This part is attempting to fetch the message based on the provided message ID and channel ID.*/
     try {
       if (channelId) {
         targetChannel = await interaction.guild.channels.fetch(channelId);
@@ -78,6 +75,8 @@ module.exports = {
       return;
     }
 
+    /* This part is checking the permissions of the user interacting with the bot and the
+       permissions required to send messages and add reactions to the target message. */
     if (
       !interaction.member.permissions.has(
         PermissionsBitField.Flags.SendMessages
@@ -105,6 +104,8 @@ module.exports = {
       return;
     }
 
+    /* This part is checking if the user interacting with the bot is included in the
+`immuneUsers` array. If the user is found in the `immuneUsers` array. Immune users cannot be RATIO*/
     if (immuneUsers.includes(interaction.user.id.toString())) {
       await interaction.deferReply({ ephemeral: true });
       await interaction.editReply(
@@ -116,6 +117,8 @@ module.exports = {
       return;
     }
 
+    /* This part is checking if the reactions RATIO are already present
+on the `targetMessage`. */
     let reactions = targetMessage.reactions.cache.map(
       (reaction) => reaction._emoji.name
     );

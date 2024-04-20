@@ -15,6 +15,7 @@ module.exports = {
       return;
     }
 
+    // Cooldowns
     const { cooldowns } = interaction.client;
 
     if (!cooldowns.has(command.data.name)) {
@@ -43,6 +44,7 @@ module.exports = {
     timestamps.set(interaction.user.id, now);
     setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
 
+    // needRefresh parameter
     let guild = await interaction.guild;
     let ownerId = await guild.ownerId;
 

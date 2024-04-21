@@ -1,4 +1,10 @@
 {
+  "GLOBALS": [
+    {
+      "NAME": "COOLDOWNS",
+      "MESSAGE": "A short pause is in order 😔 *(Wait before reusing: <t:{expiredTimestamp}:R>)*"
+    }
+  ],
   "COMMANDS": [
     {
       "NAME": "SETLANG",

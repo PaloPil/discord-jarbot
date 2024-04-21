@@ -1,5 +1,6 @@
 const { Events, Collection } = require("discord.js");
 const Guild = require("../utils/Guild");
+const lang = require("../utils/language.js");
 
 module.exports = {
   name: Events.InteractionCreate,
@@ -7,6 +8,7 @@ module.exports = {
     if (!interaction.isChatInputCommand()) return;
 
     const command = interaction.client.commands.get(interaction.commandName);
+    const guildDB = await Guild.findOne({ id: interaction.guild.id });
 
     if (!command) {
       console.error(
@@ -35,7 +37,10 @@ module.exports = {
       if (now < expirationTime) {
         const expiredTimestamp = Math.round(expirationTime / 1_000);
         return interaction.reply({
-          content: `Une petite pause s'impose 😔 *(Attend avant de réutiliser : <t:${expiredTimestamp}:R>)*`,
+          content: lang("COOLDOWNS", true)(guildDB.language, {
+            string: "MESSAGE",
+            expiredTimestamp: expiredTimestamp,
+          }),
           ephemeral: true,
         });
       }

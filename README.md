@@ -1,14 +1,16 @@
-Switch to the [French version](README_fr.md)
+➡️ Changer vers la version [Française](README_FR.md).
 
 # JARBot
 
-**J**ust **A** **R**andom **Bot** - JARBot is just a random discord bot with some random commands, made with javascript *(and not with Java like the name could suggest)*.
+**J**ust **A** **R**andom **Bot** - JARBot is just a random discord bot with some random commands, made with javascript _(and not with Java like the name could suggest)_.
 
 It's a work in progress and if you want to add a command, feel free to submit a pull request!
 
-You can find all the necessary informations to create your commands in our [**Guide**](/Guide/) *(Available in [English](/Guide/en/) and [French](/Guide/fr/))*.
+You can find all the necessary informations to create your commands in our [**Guide**](/Guide/) _(Available in [English](/Guide/en/) and [French](/Guide/fr/))_.
 
 # Build
+
+> _Change `pnpm install` by your package manager if you don't use [PNPM](https://pnpm.io/)_
 
 ```sh
 git clone https://github.com/PaloPil/discord-jarbot.git

@@ -1,4 +1,4 @@
-const https = require("https");
+const https = require("node:https");
 /**
  * The `imageDownload` function downloads an image from a given URL using a Promise in JavaScript.
  * @param url - The `imageDownload` function you provided is designed to download an image from a given

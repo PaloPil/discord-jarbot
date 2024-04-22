@@ -17,7 +17,13 @@ function lang(stringName, global) {
   const enData = require("../langs/en.json");
 
   return global
-    ? function (language, args) {
+    ? /**
+       * This function gets the language specified arguments and replace all specified arguments.
+       * @param {string} language - The `language` parameter in this function represents the language to use.
+       * @param {} args - Represents all the arguments to replace by.
+       * @returns {string} - Returns the string of the language's respective JSON, with if specified, the modified strings.
+       */
+      function (language, args) {
         let langData;
         switch (language) {
           case "fr":
@@ -59,7 +65,13 @@ function lang(stringName, global) {
 
         return locale;
       }
-    : function (language, args) {
+    : /**
+       * This function gets the language specified arguments and replace all specified arguments.
+       * @param {string} language - The `language` parameter in this function represents the language to use.
+       * @param {} args - Represents all the arguments to replace by.
+       * @returns {string} - Returns the string of the language's respective JSON, with if specified, the modified strings.
+       */
+      function (language, args) {
         let langData;
         switch (language) {
           case "fr":

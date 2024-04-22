@@ -54,13 +54,12 @@ module.exports = {
       );
     }
 
+    const guildTarget = await interaction.guild.members.fetch(user);
     let avatarURL;
-    if (serverpfp) {
-      const guildTarget = await interaction.guild.members.fetch(user);
-      avatarURL = guildTarget.displayAvatarURL({ size: 1024 });
-    } else {
-      avatarURL = user.displayAvatarURL({ size: 1024 });
-    }
+
+    serverpfp
+      ? (avatarURL = guildTarget.displayAvatarURL({ size: 1024 }))
+      : (avatarURL = user.displayAvatarURL({ size: 1024 }));
 
     const avatar = await imageDownload(avatarURL);
 

@@ -38,11 +38,9 @@ module.exports = {
     );
 
     let ephemeral;
-    if (guild) {
-      ephemeral = false;
-    } else {
-      ephemeral = true;
-    }
+
+    guild ? (ephemeral = false) : (ephemeral = true);
+
     const response = lang("SETLANG")(guild.language, {
       string: ephemeral ? "FAILED" : "SUCCESS",
     });

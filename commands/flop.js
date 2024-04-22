@@ -57,11 +57,9 @@ module.exports = {
 
     let avatarURL;
 
-    if (serverpfp) {
-      avatarURL = guildTarget.displayAvatarURL({ size: 1024 });
-    } else {
-      avatarURL = user.displayAvatarURL({ size: 1024 });
-    }
+    serverpfp
+      ? (avatarURL = guildTarget.displayAvatarURL({ size: 1024 }))
+      : (avatarURL = user.displayAvatarURL({ size: 1024 }));
 
     const avatar = await imageDownload(avatarURL);
 

@@ -6,13 +6,10 @@ const imageDownload = require("../utils/imageDownload.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("beautify")
-    .setNameLocalizations({
-      fr: "embellir",
-    })
-    .setDescription("Make a profile picture more beautiful!")
+    .setName("flop")
+    .setDescription("Provides FLOP certification")
     .setDescriptionLocalizations({
-      fr: "Rend une photo de profil plus belle !",
+      fr: "Donne une certification de FLOP",
     })
     .addUserOption((option) =>
       option
@@ -20,9 +17,9 @@ module.exports = {
         .setNameLocalizations({
           fr: "utilisateur",
         })
-        .setDescription("The user to beautify!")
+        .setDescription("The used that FLOPed")
         .setDescriptionLocalizations({
-          fr: "L'utilisateur à embellir !",
+          fr: "L'utilisateur qui a FLOP",
         })
         .setRequired(false)
     )
@@ -40,21 +37,24 @@ module.exports = {
         })
         .setRequired(false)
     ),
+
   async execute(interaction) {
     await interaction.deferReply();
 
-    const user = interaction.options.getUser("user") ?? interaction.user;
-    const serverpfp = interaction.options.getBoolean("server-pfp") ?? false;
-
     const guild = await Guild.findOne({ id: interaction.guild.id });
+
+    const user =
+      (await interaction.options.getUser("user")) ?? interaction.user;
+    const serverpfp = interaction.options.getBoolean("server-pfp") ?? false;
 
     if (user.id == interaction.client.user.id) {
       return interaction.editReply(
-        lang("BEAUTIFY")(guild.language, { string: "TRY_ON_BOT" })
+        lang("FLOP")(guild.language, { string: "THE_JAR_CANT_FLOP" })
       );
     }
 
     const guildTarget = await interaction.guild.members.fetch(user);
+
     let avatarURL;
 
     serverpfp
@@ -64,33 +64,28 @@ module.exports = {
     const avatar = await imageDownload(avatarURL);
 
     const buffer = await sharp(avatar)
-      .resize(600, 600, {
+      .resize(1024, 1024, {
         fit: "cover",
         position: "center",
       })
+      .greyscale()
       .composite([
         {
-          input: "./assets/images/jar.png",
+          input: "./assets/images/FLOP.png",
           gravity: "center",
-          blend: "multiply",
-        },
-        {
-          input: "./assets/images/jar.png",
-          gravity: "center",
-          blend: "dest-in",
         },
       ])
       .toBuffer();
 
     const file = new AttachmentBuilder(buffer, {
-      name: `Jared_${interaction.user.id}.png`,
+      name: `FLOP_${interaction.user.id}.png`,
     });
 
     await interaction.editReply({
-      content: "**Jared.**",
+      content: "**FLOP.**",
       files: [file],
     });
   },
-  cooldown: 10,
+  cooldown: 15,
   inRandomCommand: true,
 };

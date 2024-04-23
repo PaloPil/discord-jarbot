@@ -1,4 +1,6 @@
 const { Events, Collection } = require("discord.js");
+const Guild = require("../utils/Guild");
+const lang = require("../utils/language.js");
 
 module.exports = {
   name: Events.InteractionCreate,
@@ -6,6 +8,7 @@ module.exports = {
     if (!interaction.isChatInputCommand()) return;
 
     const command = interaction.client.commands.get(interaction.commandName);
+    const guildDB = await Guild.findOne({ id: interaction.guild.id });
 
     if (!command) {
       console.error(
@@ -14,6 +17,7 @@ module.exports = {
       return;
     }
 
+    // Cooldowns
     const { cooldowns } = interaction.client;
 
     if (!cooldowns.has(command.data.name)) {
@@ -33,7 +37,10 @@ module.exports = {
       if (now < expirationTime) {
         const expiredTimestamp = Math.round(expirationTime / 1_000);
         return interaction.reply({
-          content: `Une petite pause s'impose 😔 *(Attend avant de réutiliser : <t:${expiredTimestamp}:R>)*`,
+          content: lang("COOLDOWNS", true)(guildDB.language, {
+            string: "MESSAGE",
+            expiredTimestamp: expiredTimestamp,
+          }),
           ephemeral: true,
         });
       }
@@ -41,6 +48,22 @@ module.exports = {
 
     timestamps.set(interaction.user.id, now);
     setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+
+    // needRefresh parameter
+    let guild = await interaction.guild;
+    let ownerId = await guild.ownerId;
+
+    if (command.needRefresh) {
+      await Guild.findOneAndUpdate(
+        { id: guild.id },
+        {
+          name: guild.name,
+          available: true,
+          ownerId: ownerId,
+        },
+        { new: true, upsert: true }
+      );
+    }
 
     try {
       await command.execute(interaction);

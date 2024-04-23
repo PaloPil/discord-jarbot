@@ -7,7 +7,7 @@ module.exports = {
 
     client.user.setPresence({
       activities: [{ name: "Just A Random Bot", type: ActivityType.PLAYING }],
-      status: "idle",
+      status: "online",
     });
   },
 };

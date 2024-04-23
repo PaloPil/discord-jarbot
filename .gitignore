@@ -78,6 +78,7 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
+*.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -131,12 +132,26 @@ dist
 
 # Lock files
 package-lock.json
+<<<<<<< HEAD
 
 # Docker files (Just some files of test, low chance do be included)
+=======
+pnpm-lock.yaml
+
+# Docker files (Just testing for now, it's not sure to be added)
+>>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00
 compose.yaml
 Dockerfile
 README.Docker.md
 .dockerignore
 
 # VSCode
+<<<<<<< HEAD
 .vscode/
+=======
+.vscode/
+.VSCodeCounter
+
+# Test command
+test.txt
+>>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00

@@ -1,0 +1,86 @@
+{
+  "GLOBALS": [
+    {
+      "NAME": "COOLDOWNS",
+      "MESSAGE": "A short pause is in order 😔 *(Wait before reusing: <t:{expiredTimestamp}:R>)*"
+    }
+  ],
+  "COMMANDS": [
+    {
+      "NAME": "SETLANG",
+      "SUCCESS": "✅ **Server's language has been changed!**",
+      "FAILED": "❌ **Couldn't change server's language.**"
+    },
+    {
+      "NAME": "COLORDECIMAL",
+      "ERROR_INCORRECT_CODE": "❌ **Please provides a correct hex color.**",
+      "EMBED_TITLE": "Here is the result!",
+      "EMBED_DESCRIPTION": "**Hex color :** `{hexColor}`\n➡️ **Decimal color :** `{decimalColor}`"
+    },
+    {
+      "NAME": "FREENITRO",
+      "EMBED_TITLE": "Loading...",
+      "EMBED_DESCRIPTION": "**Downloading free nitro...**",
+      "EMBED_FOOTER": "Please wait...",
+      "EMBED_NEW_DESCRIPTION": "**Generating your free nitro...** Completed at {loadingMessage}",
+      "EMBED_NEW_TITLE": "**Generation finished!**",
+      "EMBED_FINISHED": "**Click [here](https://r.mtdv.me/get-free-nitro) to activate your free nitro!**",
+      "EMBED_NEW_FOOTER": "Thanks for waiting."
+    },
+    {
+      "NAME": "PING",
+      "EMBED_DESCRIPTION": "The ping is {ping}ms"
+    },
+    {
+      "NAME": "RATIO",
+      "ERROR_CANNOT_FETCH_MESSAGE_EMBED_TITLE": "**❌ Unable to retrieve the message**",
+      "ERROR_CANNOT_FETCH_MESSAGE_EMBED_DESCRIPTION": "- **Check if the ID or URL is correct.**\n- **Check in the permissions if the bot can access to the channel.**\n- **If you have indicated an ID for a message from another channel, you must set the channel where it is located.**.",
+      "NO_CHANNEL_SEND_PERMISSION": "> **❌ You do not have permission to send messages in this channel.**",
+      "NO_ADD_REACTIONS_PERMISSION": "> **❌ You do not have permission to add reactions to this message.**",
+      "USER_ALREADY_RATIO": "> ❌ The [member]({targetMessage}) is already **RATIO** !",
+      "USER_SUCCESS_RATIO": "> ✅ The [member]({targetMessage}) has been **RATIO** !",
+      "_USER_CANNOT_BE_RATIO": "> ❌ The [member]({targetMessage}) cannot be **RATIO** !",
+      "USER_IMMUNE_RATIO": "> ❌ The [member]({targetMessage}) is immune to **RATIO** !"
+    },
+    {
+      "NAME": "SUM",
+      "RESPONSES": [
+        "42",
+        "∞",
+        "Eleventy-four",
+        "-1/12",
+        "π",
+        "404",
+        "The result",
+        "China",
+        "299,792,458 m/s",
+        "9.81",
+        "i"
+      ]
+    },
+    {
+      "NAME": "SUGGEST",
+      "EMBED_TITLE": "Your suggestion has been sent!",
+      "EMBED_DESCRIPTION": "**Thanks for your suggestion!**",
+      "ERROR_CANNOT_SEND_SUGGEST": "❌ **An error occured while sending the suggestion, please retry or contact support.**"
+    },
+    {
+      "NAME": "BEAUTIFY",
+      "TRY_ON_BOT": "I'm already beautiful, I don't need more :3"
+    },
+    {
+      "NAME": "RANDOM-NUMBER",
+      "RESPONSE": "**Here's your random number:** `{num}`"
+    },
+    {
+      "NAME": "SPAM-ME",
+      "BEGIN_MESSAGE": "And... here we goooo!",
+      "PING_MESSAGE": "Hey <@{userid}>!",
+      "ENDING_MESSAGE": "And voilà! It's done!"
+    },
+    {
+      "NAME": "FLOP",
+      "THE_JAR_CANT_FLOP": "❌ I can't **FLOP**, I'm a jar!"
+    }
+  ]
+}

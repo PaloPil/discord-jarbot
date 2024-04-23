@@ -106,7 +106,7 @@ module.exports = {
 
     /* This part is checking if the user interacting with the bot is included in the
 `immuneUsers` array. If the user is found in the `immuneUsers` array. Immune users cannot be RATIO*/
-    if (immuneUsers.includes(interaction.user.id)) {
+    if (immuneUsers.includes(targetMessage.author.id.toString())) {
       await interaction.deferReply({ ephemeral: true });
       await interaction.editReply(
         lang("RATIO")(guild.language, {

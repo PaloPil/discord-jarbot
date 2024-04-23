@@ -6,16 +6,6 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("suggest")
     .setDescription("Suggérer une commande à ajouter sur le bot !")
-<<<<<<< HEAD
-    .addStringOption((option) => {
-      return option
-        .setName("title")
-        .setDescription("Titre de ta suggestion")
-        .setRequired(true);
-    })
-    .addStringOption((option) => {
-      return option
-=======
     .addStringOption((option) =>
       option
         .setName("title")
@@ -24,7 +14,6 @@ module.exports = {
     )
     .addStringOption((option) =>
       option
->>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00
         .setName("suggestion")
         .setDescription("Décris ta suggestion de commande")
         .setRequired(true)
@@ -42,7 +31,6 @@ module.exports = {
 
     const guildDB = await Guild.findOne({ id: interaction.guild.id });
     const user = await interaction.guild.members.fetch(interaction.user.id);
-    const title = await interaction.options.getString("title");
 
     // Switching between community's channel or support's channels
     const channelId = interaction.options.getBoolean("community")
@@ -65,21 +53,6 @@ module.exports = {
           value: `\`${interaction.user.tag} (${interaction.user.id})\``,
           inline: true,
         },
-<<<<<<< HEAD
-        {
-          name: "**Depuis le serveur :**",
-          value: `\`${user.guild.name} (${user.guild.id})\``,
-          inline: true,
-        },
-        {
-          name: "**Titre de la suggestion :**",
-          value: `\`\`\`\n${title}\n\`\`\``,
-        },
-        {
-          name: "**Suggestion :**",
-          value: `\`\`\`\n${suggest}\n\`\`\``,
-        }
-=======
         ...(interaction.options.getBoolean("community")
           ? []
           : [
@@ -90,7 +63,6 @@ module.exports = {
               },
             ]),
         { name: "**Suggestion :**", value: `\`\`\`\n${suggest}\n\`\`\`` }
->>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00
       );
 
     try {
@@ -99,11 +71,7 @@ module.exports = {
       await channel.threads.create({
         name: title,
         startMessage: message,
-<<<<<<< HEAD
-        reason: `Suggestion de ${interaction.user.tag}`,
-=======
         reason: "New Suggestion",
->>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00
       });
       message.react("✅");
       message.react("➖");

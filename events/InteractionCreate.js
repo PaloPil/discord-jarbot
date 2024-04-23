@@ -9,7 +9,6 @@ module.exports = {
   async execute(interaction) {
 
     if (interaction.isModalSubmit()) {
-
       const commandsPath = path.join(__dirname, "/../commands");
       const commandFiles = fs
         .readdirSync(commandsPath)

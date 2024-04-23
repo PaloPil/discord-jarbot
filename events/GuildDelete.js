@@ -5,7 +5,7 @@ module.exports = {
   name: Events.GuildDelete,
   async execute(guild) {
     try {
-      const deletedGuild = await Guild.findOneAndUpdate(
+      await Guild.findOneAndUpdate(
         { id: guild.id },
         { available: false },
         { new: true }

@@ -1,50 +1,28 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const sharp = require("sharp");
-const https = require("https");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
-
-const imageDownload = (url) => {
-  if (!(url && /^https?:\/\/[^ ]+$/.test(url)))
-    throw new TypeError("A valid url is required");
-
-  return new Promise((resolve) => {
-    https.get(url, (response) => {
-      let data = Buffer.from([], "binary");
-
-      response.on("data", (chunk) => {
-        const buffer = Buffer.from(chunk, "binary");
-        const length = data.length + buffer.length;
-
-        data = Buffer.concat([data, buffer], length);
-      });
-
-      response.on("end", () => {
-        resolve(data);
-      });
-    });
-  });
-};
+const imageDownload = require("../utils/imageDownload.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("beautify")
     .setNameLocalizations({
-      "fr": "embellir",
+      fr: "embellir",
     })
     .setDescription("Make a profile picture more beautiful!")
     .setDescriptionLocalizations({
-      "fr": "Rend une photo de profil plus belle !",
+      fr: "Rend une photo de profil plus belle !",
     })
     .addUserOption((option) =>
       option
         .setName("user")
         .setNameLocalizations({
-          "fr": "utilisateur",
+          fr: "utilisateur",
         })
         .setDescription("The user to beautify!")
         .setDescriptionLocalizations({
-          "fr": "L'utilisateur à embellir !",
+          fr: "L'utilisateur à embellir !",
         })
         .setRequired(false)
     )
@@ -52,13 +30,13 @@ module.exports = {
       option
         .setName("server-pfp")
         .setNameLocalizations({
-          "fr": "pp-serveur",
+          fr: "pp-serveur",
         })
         .setDescription(
           "Use user's server profile picture rather than profile one"
         )
         .setDescriptionLocalizations({
-          "fr": "Utiliser la photo de profil sur le serveur plutôt que celle du profil",
+          fr: "Utiliser la photo de profil sur le serveur plutôt que celle du profil",
         })
         .setRequired(false)
     ),
@@ -76,13 +54,12 @@ module.exports = {
       );
     }
 
+    const guildTarget = await interaction.guild.members.fetch(user);
     let avatarURL;
-    if (serverpfp) {
-      const guildTarget = await interaction.guild.members.fetch(user);
-      avatarURL = guildTarget.displayAvatarURL({ size: 1024 });
-    } else {
-      avatarURL = user.displayAvatarURL({ size: 1024 });
-    }
+
+    serverpfp
+      ? (avatarURL = guildTarget.displayAvatarURL({ size: 1024 }))
+      : (avatarURL = user.displayAvatarURL({ size: 1024 }));
 
     const avatar = await imageDownload(avatarURL);
 
@@ -105,10 +82,9 @@ module.exports = {
       ])
       .toBuffer();
 
-    const file = new AttachmentBuilder(
-      buffer,
-      { name: `Jared_${interaction.user.id}.png` }
-    );
+    const file = new AttachmentBuilder(buffer, {
+      name: `Jared_${interaction.user.id}.png`,
+    });
 
     await interaction.editReply({
       content: "**Jared.**",

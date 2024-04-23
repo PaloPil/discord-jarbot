@@ -138,24 +138,12 @@ on the `targetMessage`. */
       targetMessage: targetMessage.url,
     });
 
-<<<<<<< HEAD
-        return interaction.channel.send(
-          `> ✅ Le [membre](${targetMessage.url}) s'est fait **RATIO** !`
-        );
-      } catch (error) {
-        return interaction.editReply(
-          `> ❌ Le [membre](${targetMessage.url}) ne peut pas être **RATIO** !`
-        );
-      }
-    }
-=======
     toReact.map((emoji) => targetMessage.react(emoji));
 
     await interaction.reply({
       content: response,
       ephemeral: allPresent,
     });
->>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00
   },
   cooldown: 10,
   inRandomCommand: false,

@@ -20,13 +20,10 @@ const GuildSchema = new mongoose.Schema({
     required: true,
     default: true,
   },
-<<<<<<< HEAD
-=======
   ownerId: {
     type: Number,
     required: false,
   },
->>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00
 });
 
 const Guild = mongoose.model("Guild", GuildSchema);

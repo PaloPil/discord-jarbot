@@ -3,36 +3,14 @@ const { SlashCommandBuilder } = require("discord.js");
 const meows = [
   "Meow.",
   "Meow?",
-<<<<<<< HEAD
-  "mrowl",
-  "mew",
-  "Meow, meeeeow, mwowwww, meeeeeoww, mow.",
-  "meow meow meow meow meow meow meow meow meow meow\nmeow meow meow meow meow meow meow meow\nmeow meow meow meow\nmeow meow",
-=======
   "mew",
   "Meow, meeeeow, mwowwww, meeeeeoww, mow.",
   "meow meow meow meow meow meow meow meow meow meow meow meow meow",
->>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00
   "purrrrr",
   "growl!!",
   "grrr",
   "mmmm.... purrr.... mmmm...",
   "purr.",
-<<<<<<< HEAD
-  "...",
-  "mew? purrrrrrr.... mmm..",
-  "hisssssss",
-  "hyao!",
-  "mewew",
-  "Meow? Mew meeeow me meeeeoewowow mew meww meow.\nMew, meow mow meow meow.",
-  "Me mew me meeeeooow me meow mew meeeowww purr moww meow me mew meoww, me mew meeowow me meeeeeoow mew meow purrr grrr meow. Meeow; meow, meow, grr meow. Mewowow mew, me meow mew meeeowww.\nMeoweeoow mew meow purrr grrr. Meows, meow moo mee meow.\nMeow me me me meooow.",
-  "Meoww? meow. meow meow, meow meow meow.",
-  "mew mew mew mew.",
-  "prrrrr... snort.",
-  "Myooooo.",
-  "Meow meow meow meeeeow meow meow.\nMeow meow meow.\n",
-  "purrr, purr, purrrrr...",
-=======
   "mew? purrrrrrr.... mmm..",
   "hisssssss",
   "Mewew",
@@ -44,21 +22,11 @@ const meows = [
   "Myooooo.",
   "Meow meow meow meeeeow meow meow. Meow meow meow.",
   "Purrr, purr, purrrrr...",
->>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00
   "Miaule.",
   "Meowsterclass!",
 ];
 
 module.exports = {
-<<<<<<< HEAD
-  data: new SlashCommandBuilder().setName("meow").setDescription("Meow."),
-  async execute(interaction) {
-    const max = meows.length;
-    const random = Math.floor(Math.random() * max);
-    const response = meows[random];
-
-    await interaction.reply(response);
-=======
   data: new SlashCommandBuilder()
     .setName("meow")
     .setDescription("Meow.")
@@ -95,7 +63,6 @@ module.exports = {
 
       await interaction.reply(meowifiedMessage);
     }
->>>>>>> 1a598450aa6e82820f9c8b67b9006314b1d8cc00
   },
   cooldown: 0,
   inRandomCommand: true,

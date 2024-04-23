@@ -1,0 +1,86 @@
+{
+  "GLOBALS": [
+    {
+      "NAME": "COOLDOWNS",
+      "MESSAGE": "Une petite pause s'impose 😔 *(Attend avant de réutiliser : <t:{expiredTimestamp}:R>)*"
+    }
+  ],
+  "COMMANDS": [
+    {
+      "NAME": "SETLANG",
+      "SUCCESS": "✅ **La langue a été changé avec succès !**",
+      "FAILED": "❌ **La langue n'a pas pu être changé.**"
+    },
+    {
+      "NAME": "COLORDECIMAL",
+      "ERROR_INCORRECT_CODE": "❌ **Veuillez indiquez un code couleur hexadécimal correcte.**",
+      "EMBED_TITLE": "Voici le résultat !",
+      "EMBED_DESCRIPTION": "**Code héxadecimal :** `{hexColor}`\n➡️ **Le code décimal :** `{decimalColor}`"
+    },
+    {
+      "NAME": "FREENITRO",
+      "EMBED_TITLE": "Chargement...",
+      "EMBED_DESCRIPTION": "**Téléchargement de Nitro gratuit...**",
+      "EMBED_FOOTER": "Veuillez patienter...",
+      "EMBED_NEW_DESCRIPTION": "**Génération du nitro gratuit...** {loadingMessage}",
+      "EMBED_NEW_TITLE": "**Génération terminé !**",
+      "EMBED_FINISHED": "**Cliquez [ici](https://r.mtdv.me/get-free-nitro) pour activer votre Nitro gratuit !**",
+      "EMBED_NEW_FOOTER": "Merci d'avoir attendu."
+    },
+    {
+      "NAME": "PING",
+      "EMBED_DESCRIPTION": "Le ping est de {ping}ms"
+    },
+    {
+      "NAME": "RATIO",
+      "ERROR_CANNOT_FETCH_MESSAGE_EMBED_TITLE": "> **❌ Impossible de récupérer le message**.",
+      "ERROR_CANNOT_FETCH_MESSAGE_EMBED_DESCRIPTION": "- **Vérifiez si l'ID ou l'URL est correcte.**\n- **Vérifiez dans les permissions que le bot puisse accéder au salon.**\n- **Si vous avez indiqué un identifiant d'un message qui ne se trouve pas dans le salon actuel vous devez obligatoirement indiquer le salon où il se situe.**",
+      "NO_CHANNEL_SEND_PERMISSION": "> **❌ Vous n'avez pas la permission d'envoyer des messages dans ce salon.**",
+      "NO_ADD_REACTIONS_PERMISSION": "> **❌ Vous n'avez pas la permission d'ajouter des réactions à ce message.**",
+      "USER_ALREADY_RATIO": "> ❌ Le [membre]({targetMessage}) est déjà **RATIO** !",
+      "USER_SUCCESS_RATIO": "> ✅ Le [membre]({targetMessage}) s'est fait **RATIO** !",
+      "_USER_CANNOT_BE_RATIO": "> ❌ Le [membre]({targetMessage}) ne peut pas être **RATIO** !",
+      "USER_IMMUNE_RATIO": "> ❌ Le [membre]({targetMessage}) est immunisé contre le **RATIO** !"
+    },
+    {
+      "NAME": "SUM",
+      "RESPONSES": [
+        "42",
+        "∞",
+        "Quarante-douze",
+        "-1/12",
+        "π",
+        "L'Australie",
+        "404",
+        "Le résultat",
+        "299 792 458 m/s",
+        "9,81",
+        "i"
+      ]
+    },
+    {
+      "NAME": "SUGGEST",
+      "EMBED_TITLE": "Votre suggestion a bien été envoyé !",
+      "EMBED_DESCRIPTION": "**Merci pour votre suggestion !**",
+      "ERROR_CANNOT_SEND_SUGGEST": "❌ **Il y'a eu une erreur lors de l'envoi de la suggestion. Réessayez ou contactez le support.**"
+    },
+    {
+      "NAME": "BEAUTIFY",
+      "TRY_ON_BOT": "Je suis déjà très beau je n'ai pas besoin de + :3"
+    },
+    {
+      "NAME": "RANDOM-NUMBER",
+      "RESPONSE": "**Voici votre nombre aléatoire :** `{num}`"
+    },
+    {
+      "NAME": "SPAM-ME",
+      "BEGIN_MESSAGE": "Etttt z'est partiiiii !",
+      "PING_MESSAGE": "<@{userid}>, c'est pour toi !",
+      "ENDING_MESSAGE": "Voili voilou !"
+    },
+    {
+      "NAME": "FLOP",
+      "THE_JAR_CANT_FLOP": "❌ Je ne peux pas **FLOP**, je suis un pot !"
+    }
+  ]
+}

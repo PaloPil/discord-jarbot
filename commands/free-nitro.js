@@ -1,18 +1,37 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const Guild = require("../utils/Guild.js");
+const lang = require("../utils/language.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("free-nitro")
-    .setDescription("Génère un code discord nitro gratuit !"),
+    .setNameLocalizations({
+      fr: "nitro-gratuit",
+    })
+    .setDescription("Génère un code discord nitro gratuit !")
+    .setDescriptionLocalizations({
+      "en-US": "Generates a free discord nitro code!",
+    }),
   async execute(interaction) {
     await interaction.deferReply();
+    const guild = await Guild.findOne({ id: interaction.guild.id });
 
     const embed = new EmbedBuilder()
       .setColor("#e74c3c")
-      .setTitle("Chargement...")
-      .setDescription("**Téléchargement de Nitro gratuit...**")
+      .setTitle(
+        lang("FREENITRO")(guild.language, {
+          string: "EMBED_TITLE",
+        })
+      )
+      .setDescription(
+        lang("FREENITRO")(guild.language, {
+          string: "EMBED_DESCRIPTION",
+        })
+      )
       .setFooter({
-        text: "Veuillez patienter, cela peut prendre quelques minutes.",
+        text: lang("FREENITRO")(guild.language, {
+          string: "EMBED_FOOTER",
+        }),
       });
 
     await interaction.editReply({ embeds: [embed] });
@@ -24,7 +43,10 @@ module.exports = {
     for (let i = 0; i < loadingMessage.length; i++) {
       await new Promise((resolve) => setTimeout(resolve, waitTime[i]));
       embed.setDescription(
-        `**Génération du nitro gratuit... ${loadingMessage[i]}**`
+        lang("FREENITRO")(guild.language, {
+          string: "EMBED_NEW_DESCRIPTION",
+          loadingMessage: loadingMessage[i],
+        })
       );
       await interaction.editReply({ embeds: [embed] });
     }
@@ -32,12 +54,22 @@ module.exports = {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     embed
-      .setTitle("**Génération terminé !**")
+      .setTitle(
+        lang("FREENITRO")(guild.language, {
+          string: "EMBED_NEW_TITLE",
+        })
+      )
       .setDescription(
-        `**Cliquez [ici](https://r.mtdv.me/get-free-nitro) pour activer votre Nitro gratuit !**`
+        lang("FREENITRO")(guild.language, {
+          string: "EMBED_FINISHED",
+        })
       )
       .setColor("#ff0000")
-      .setFooter({ text: "Merci d'avoir attendu." });
+      .setFooter({
+        text: lang("FREENITRO")(guild.language, {
+          string: "EMBED_NEW_FOOTER",
+        }),
+      });
     await interaction.editReply({ embeds: [embed] });
   },
   cooldown: 10,

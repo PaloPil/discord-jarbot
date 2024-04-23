@@ -78,6 +78,7 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
+*.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -131,9 +132,7 @@ dist
 
 # Lock files
 package-lock.json
-
-# Private files
-config.json
+pnpm-lock.yaml
 
 # Docker files (Just testing for now, it's not sure to be added)
 compose.yaml
@@ -143,7 +142,7 @@ README.Docker.md
 
 # VSCode
 .vscode/
+.VSCodeCounter
 
-# Work in progress
-utils/
-locales/
+# Test command
+test.txt

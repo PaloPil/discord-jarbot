@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("discord.js");
 const BlaguesAPI = require("blagues-api");
 const blagues = new BlaguesAPI(process.env.BLAGUETOKEN);
 
-/* En réalité les types de blagues sont : 
+/* En réalité les types de blagues sont :
     global, dev, dark, limit, beauf, blondes
    mais j'ai retiré ici les blagues limites (+18) et dark (humour noir) étant donnés leur nature.
 */
@@ -13,10 +13,19 @@ const excludedCategories = ["dark", "limit"];
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("blague")
+    .setNameLocalizations({
+      "en-US": "joke",
+    })
     .setDescription("Réponds par une blague !")
+    .setDescriptionLocalizations({
+      "en-US": "(FRENCH ONLY) Responds with a joke",
+    })
     .addStringOption((option) => {
       return option
-        .setName("category")
+        .setName("catégorie")
+        .setNameLocalizations({
+          "en-US": "category",
+        })
         .setDescription("Type de blague")
         .setRequired(false)
         .addChoices(
@@ -36,7 +45,7 @@ module.exports = {
         throw new Error(`Catégorie de blague invalide : ${selectedType}`);
       }
 
-      const joke = await fetchBlague(
+      const joke = await fetchJoke(
         process.env.BLAGUETOKEN,
         category,
         excludedCategories
@@ -64,7 +73,7 @@ module.exports = {
   inRandomCommand: true,
 };
 
-async function fetchBlague(token, category, excludedCategories) {
+async function fetchJoke(token, category, excludedCategories) {
   const url = `https://www.blagues-api.fr/api/type/${category}/random?disallow=${excludedCategories.join(
     ","
   )}`;

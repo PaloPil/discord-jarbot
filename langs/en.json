@@ -81,6 +81,12 @@
     {
       "NAME": "FLOP",
       "THE_JAR_CANT_FLOP": "❌ I can't **FLOP**, I'm a jar!"
+    },
+    {
+      "NAME": "REPHRASE",
+      "POPUP_TITLE": "Rephrase",
+      "INPUT_LABEL": "Enter the text to rephrase",
+      "INPUT_PLACEHOLDER": "Enter the text here..."
     }
   ]
 }

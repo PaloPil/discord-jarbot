@@ -81,6 +81,12 @@
     {
       "NAME": "FLOP",
       "THE_JAR_CANT_FLOP": "❌ Je ne peux pas **FLOP**, je suis un pot !"
+    },
+    {
+      "NAME": "REPHRASE",
+      "POPUP_TITLE": "Reformuler",
+      "INPUT_LABEL": "Entrez le texte à reformuler",
+      "INPUT_PLACEHOLDER": "Entrez le texte ici..."
     }
   ]
 }

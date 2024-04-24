@@ -3,16 +3,20 @@ const Guild = require("../utils/Guild");
 const fs = require("node:fs");
 const path = require("node:path");
 const lang = require("../utils/language.js");
+const Logger = require("../utils/Logger");
 
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
-
     if (interaction.isModalSubmit()) {
       const commandsPath = path.join(__dirname, "/../commands");
       const commandFiles = fs
         .readdirSync(commandsPath)
-        .filter((file) => file.endsWith(".js") && file.replace(".js", "") === interaction.customId);
+        .filter(
+          (file) =>
+            file.endsWith(".js") &&
+            file.replace(".js", "") === interaction.customId
+        );
       if (commandFiles.length === 0) {
         console.error(`No modal matching ${interaction.customId} was found.`);
         return;
@@ -27,7 +31,7 @@ module.exports = {
             console.error(error);
           }
         }
-      };
+      }
       return;
     }
 
@@ -94,8 +98,8 @@ module.exports = {
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.error(`Error executing ${interaction.commandName}`);
-      console.error(error);
+      Logger.error(true, interaction, error);
+      console.log(error);
     }
   },
 };

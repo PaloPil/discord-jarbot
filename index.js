@@ -15,6 +15,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 client.cooldowns = new Collection();
+
 // client.immuneUsers = [
 //   "763337508175216641", // PaloPil
 //   "525729900670222337", // Zaxerone

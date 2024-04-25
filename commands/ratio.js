@@ -37,7 +37,7 @@ module.exports = {
     let channel =
       interaction.options.getChannel("channel") ?? interaction.channel;
 
-    const immuneUsers = interaction.client.immuneUsers;
+    // const immuneUsers = interaction.client.immuneUsers;
     let messageId;
     let channelId;
 

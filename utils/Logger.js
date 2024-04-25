@@ -1,5 +1,5 @@
 class Logger {
-  static async log(interaction, content, isCommand, type = "log") {
+  static async log(isCommand, interaction, content, type = "log") {
     const date = new Date(Date.now());
     const timestamp = `\`${date.toLocaleDateString(
       "fr-FR"
@@ -74,8 +74,8 @@ class Logger {
     }
   }
 
-  static async error(client, content, isCommand) {
-    return this.log(client, content, isCommand, "error");
+  static async error(isCommand, client, content) {
+    return this.log(isCommand, client, content, "error");
   }
 
   static async warn(client, content) {

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 const meows = [
   "Meow.",
@@ -41,11 +42,53 @@ module.exports = {
   async execute(interaction) {
     const meow = interaction.options.getString("meow");
     if (meow === null) {
+      const THECATAPI_URL = "https://api.thecatapi.com/v1/images/search";
       const max = meows.length;
       const random = Math.floor(Math.random() * max);
       const response = meows[random];
 
-      await interaction.reply(response);
+      const fetched = await fetch(THECATAPI_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.CATAPI,
+        },
+        redirect: "follow",
+        params: {
+          size: "med",
+          mime_types: "jpg",
+          format: "json",
+          has_breeds: true,
+          order: "RANDOM",
+          page: 0,
+          limit: 1,
+          tag: "playful",
+        },
+      });
+
+      let data;
+      let imageUrl;
+
+      try {
+        data = await fetched.json();
+        imageUrl = data[0].url;
+      } catch (e) {
+        console.log;
+      }
+      const embed = new EmbedBuilder()
+        .setTitle("Meow!")
+        .setColor("#" + Math.floor(Math.random() * 16777215).toString(16))
+        .setImage(imageUrl);
+
+      await interaction.reply(
+        fetched.ok
+          ? {
+              content: response,
+              embeds: [embed],
+            }
+          : { content: response }
+      );
+      this.cooldown = 7;
     } else {
       let meowifiedMessage = "";
 

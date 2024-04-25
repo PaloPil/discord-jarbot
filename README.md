@@ -16,9 +16,9 @@ You can find all the necessary informations to create your commands in our [**Gu
 git clone https://github.com/PaloPil/discord-jarbot.git
 cd discord-jarbot
 pnpm install
-echo "TOKEN=" >> .env && echo "BLAGUETOKEN=" >> .env && echo "DBUSERNAME=" >> .env && echo "DBPASSWORD=" >> .env && echo "MONGOURI=" >> .env
+echo "TOKEN=" >> .env && echo "BLAGUETOKEN=" >> .env && echo "DBUSERNAME=" >> .env && echo "DBPASSWORD=" >> .env && echo "MONGOURI=" >> .env && echo "CATAPI=" > .env
 ```
 
-> ❗ You must change your **`.env`** details by your [discord bot's token](https://discord.com/developers/applications), [Blagues-API token](https://www.blagues-api.fr/), and your [MongoDB details](https://www.mongodb.com)
+> ❗ You must change your **`.env`** details by your [discord bot's token](https://discord.com/developers/applications), [Blagues-API token](https://www.blagues-api.fr/), your [MongoDB details](https://www.mongodb.com) and [TheCatAPI Key](https://thecatapi.com)
 
 > 💡 The **`MONGOURI`** env variable is what comes after the `@` in your MongoDB URI

@@ -8,6 +8,15 @@ const Logger = require("../utils/Logger");
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
+    if (
+      interaction.client.user.id === "1224386090513858590" &&
+      !interaction.client.betaTesters.includes(interaction.user.id)
+    ) {
+      return interaction.reply({
+        content: "Beta Testers Only.",
+        ephemeral: true,
+      });
+    }
     if (interaction.isModalSubmit()) {
       const commandsPath = path.join(__dirname, "/../commands");
       const commandFiles = fs

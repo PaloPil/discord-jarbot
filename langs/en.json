@@ -87,6 +87,12 @@
       "POPUP_TITLE": "Rephrase",
       "INPUT_LABEL": "Enter the text to rephrase",
       "INPUT_PLACEHOLDER": "Enter the text here..."
+    },
+    {
+      "NAME": "FAKEBAN",
+      "DEFAULT_REASON": "No reason. ¯\\_(ツ)_/¯",
+      "BAN_MESSAGE": "The user `{username}` has been banned for the following reason:",
+      "BANNED_BY": "By {executor}"
     }
   ]
 }

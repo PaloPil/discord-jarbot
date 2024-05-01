@@ -87,6 +87,12 @@
       "POPUP_TITLE": "Reformuler",
       "INPUT_LABEL": "Entrez le texte à reformuler",
       "INPUT_PLACEHOLDER": "Entrez le texte ici..."
+    },
+    {
+      "NAME": "FAKEBAN",
+      "DEFAULT_REASON": "Pas de raison. ¯\\_(ツ)_/¯",
+      "BAN_MESSAGE": "L'utilisateur `{username}` a été banni pour la raison suivante :",
+      "BANNED_BY": "Par {executor}"
     }
   ]
 }

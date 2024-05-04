@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 const Guild = require("../utils/Guild.js");
 const lang = require("../utils/language.js");
 
@@ -44,16 +43,16 @@ module.exports = {
 
     const target = interaction.options.getUser("target");
     const reason =
-      interaction.options.getString("reason") ?? lang("FAKEBAN")(guild.language, {
-        string: "DEFAULT_REASON"
+      interaction.options.getString("reason") ??
+      lang("FAKEBAN")(guild.language, {
+        string: "DEFAULT_REASON",
       });
-
 
     const embed = new EmbedBuilder()
       .setTitle(
         lang("FAKEBAN")(guild.language, {
           string: "BAN_MESSAGE",
-          username: target.tag
+          username: target.tag,
         })
       )
       .setDescription(`*${reason}*`)
@@ -61,7 +60,7 @@ module.exports = {
       .setFooter({
         text: lang("FAKEBAN")(guild.language, {
           string: "BANNED_BY",
-          executor: interaction.user.tag
+          executor: interaction.user.tag,
         }),
         iconURL: interaction.user.displayAvatarURL(),
       })

@@ -15,12 +15,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 client.cooldowns = new Collection();
-client.betaTesters = [
-  "525729900670222337", // Zaxerone
-  "763337508175216641", // PaloPil
-  "480794907095728128", // Roswhil
-  "1172703500547928166", // Gattito
-];
 
 const db = `mongodb+srv://${process.env.DBUSERNAME}:${encodeURIComponent(
   process.env.DBPASSWORD

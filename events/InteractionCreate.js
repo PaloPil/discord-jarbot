@@ -1,22 +1,27 @@
 const { Events, Collection } = require("discord.js");
 const Guild = require("../utils/Guild");
+const BetaTester = require("../utils/BetaTester");
 const fs = require("node:fs");
 const path = require("node:path");
 const lang = require("../utils/language.js");
-const Logger = require("../utils/Logger");
+const Logger = require("../utils/logger.js");
 
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
-    if (
-      interaction.client.user.id === "1224386090513858590" &&
-      !interaction.client.betaTesters.includes(interaction.user.id)
-    ) {
-      return interaction.reply({
-        content: "Beta Testers Only.",
-        ephemeral: true,
+    // Beta Testers
+    if (interaction.client.user.id === "1224386090513858590") {
+      const isBetaTester = await BetaTester.findOne({
+        id: interaction.user.id,
       });
+
+      if (!isBetaTester)
+        return interaction.reply({
+          content: "Beta Testers Only.",
+          ephemeral: true,
+        });
     }
+    // Discord Modals
     if (interaction.isModalSubmit()) {
       const commandsPath = path.join(__dirname, "/../commands");
       const commandFiles = fs

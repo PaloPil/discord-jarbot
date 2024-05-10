@@ -10,19 +10,20 @@ module.exports = {
       "en-US": "Gives the bot's ping!",
     }),
   async execute(interaction) {
-    await interaction.deferReply();
-    const guild = await Guild.findOne({ id: interaction.guild.id });
+    interaction.deferReply();
+    const guild = Guild.findOne({ id: interaction.guild.id });
 
     const reply = await interaction.fetchReply();
 
     const ping = reply.createdTimestamp - interaction.createdTimestamp;
+    const apiPing = Math.round(interaction.client.ws.ping);
 
     const embed = {
       title: "Pong!",
-      description: lang("PING")(guild.language, {
+      description: `${lang("PING")(guild.language, {
         string: "EMBED_DESCRIPTION",
         ping: ping,
-      }),
+      })}\nAPI: ${apiPing}ms`,
       color: 12246104,
       footer: {
         text: interaction.user.username,
@@ -30,7 +31,7 @@ module.exports = {
       },
     };
 
-    await interaction.editReply({ embeds: [embed] });
+    interaction.editReply({ embeds: [embed] });
   },
   cooldown: 0,
   inRandomCommand: true,

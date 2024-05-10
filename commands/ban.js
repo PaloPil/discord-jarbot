@@ -7,9 +7,9 @@ const lang = require("../utils/language.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ban")
-    .setDescription("Ban a user from the server!")
+    .setDescription("Ban any user you want from the server!")
     .setDescriptionLocalizations({
-      fr: "Bannir un utilisateur du serveur !",
+      fr: "Bannir n'importe quel utilisateur que vous voulez du serveur !",
     })
     .addUserOption((option) =>
       option
@@ -41,7 +41,7 @@ module.exports = {
 
     const guild = await Guild.findOne({ id: interaction.guild.id });
 
-    const target = interaction.options.getUser("target");
+    const target = interaction.options.getUser("target") ?? interaction.user;
     const reason =
       interaction.options.getString("reason") ??
       lang("FAKEBAN")(guild.language, {
@@ -85,4 +85,6 @@ module.exports = {
       }, 3 * 1000);
     }
   },
+  cooldown: 0,
+  inRandomCommand: true,
 };

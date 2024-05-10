@@ -62,7 +62,14 @@
       "NAME": "SUGGEST",
       "EMBED_TITLE": "Votre suggestion a bien été envoyé !",
       "EMBED_DESCRIPTION": "**Merci pour votre suggestion !**",
-      "ERROR_CANNOT_SEND_SUGGEST": "❌ **Il y'a eu une erreur lors de l'envoi de la suggestion. Réessayez ou contactez le support.**"
+      "ERROR_CANNOT_SEND_SUGGEST": "❌ **Il y'a eu une erreur lors de l'envoi de la suggestion. Réessayez ou contactez le support.**",
+      "POPUP_TITLE": "Faire une suggestion",
+      "TITLE_LABEL": "Titre de la suggestion",
+      "TITLE_PLACEHOLDER": "Entrez le titre de votre suggestion",
+      "SUGGESTION_LABEL": "Description de la suggestion",
+      "SUGGESTION_PLACEHOLDER": "Décrivez votre suggestion en détail",
+      "COMMUNITY_LABEL": "Envoyer à la communauté",
+      "COMMUNITY_PLACEHOLDER": "Ecrivez n'importe quoi ici pour envoyer à la communauté."
     },
     {
       "NAME": "BEAUTIFY",

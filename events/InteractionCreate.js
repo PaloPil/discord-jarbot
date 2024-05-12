@@ -3,8 +3,8 @@ const Guild = require("../utils/Guild");
 const BetaTester = require("../utils/BetaTester");
 const fs = require("node:fs");
 const path = require("node:path");
-const lang = require("../utils/language.js");
-const Logger = require("../utils/logger.js");
+const lang = require("../utils/language");
+const Logger = require("../utils/Logger");
 
 module.exports = {
   name: Events.InteractionCreate,

@@ -48,6 +48,5 @@ module.exports = {
     interaction.reply({ content: response, ephemeral: ephemeral });
   },
   cooldown: 0,
-  needRefresh: true,
   inRandomCommand: false,
 };

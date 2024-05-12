@@ -62,7 +62,14 @@
       "NAME": "SUGGEST",
       "EMBED_TITLE": "Your suggestion has been sent!",
       "EMBED_DESCRIPTION": "**Thanks for your suggestion!**",
-      "ERROR_CANNOT_SEND_SUGGEST": "❌ **An error occured while sending the suggestion, please retry or contact support.**"
+      "ERROR_CANNOT_SEND_SUGGEST": "❌ **An error occured while sending the suggestion, please retry or contact support.**",
+      "POPUP_TITLE": "Make a suggestion",
+      "TITLE_LABEL": "Suggestion title",
+      "TITLE_PLACEHOLDER": "Enter the title of your suggestion",
+      "SUGGESTION_LABEL": "Suggestion description",
+      "SUGGESTION_PLACEHOLDER": "Describe your suggestion in detail",
+      "COMMUNITY_LABEL": "Send to community",
+      "COMMUNITY_PLACEHOLDER": "Type anything here to send to community."
     },
     {
       "NAME": "BEAUTIFY",
@@ -81,6 +88,18 @@
     {
       "NAME": "FLOP",
       "THE_JAR_CANT_FLOP": "❌ I can't **FLOP**, I'm a jar!"
+    },
+    {
+      "NAME": "REPHRASE",
+      "POPUP_TITLE": "Rephrase",
+      "INPUT_LABEL": "Enter the text to rephrase",
+      "INPUT_PLACEHOLDER": "Enter the text here..."
+    },
+    {
+      "NAME": "FAKEBAN",
+      "DEFAULT_REASON": "No reason. ¯\\_(ツ)_/¯",
+      "BAN_MESSAGE": "The user `{username}` has been banned for the following reason:",
+      "BANNED_BY": "By {executor}"
     }
   ]
 }

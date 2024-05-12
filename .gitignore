@@ -134,7 +134,7 @@ dist
 package-lock.json
 pnpm-lock.yaml
 
-# Docker files (Just testing for now, it's not sure to be added)
+# Docker files (Just some tests)
 compose.yaml
 Dockerfile
 README.Docker.md
@@ -143,6 +143,3 @@ README.Docker.md
 # VSCode
 .vscode/
 .VSCodeCounter
-
-# Test command
-test.txt

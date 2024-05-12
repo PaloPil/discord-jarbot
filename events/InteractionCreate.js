@@ -1,10 +1,54 @@
 const { Events, Collection } = require("discord.js");
 const Guild = require("../utils/Guild");
+const BetaTester = require("../utils/BetaTester");
+const fs = require("node:fs");
+const path = require("node:path");
 const lang = require("../utils/language.js");
+const Logger = require("../utils/logger.js");
 
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
+    // Beta Testers
+    if (interaction.client.user.id === "1224386090513858590") {
+      const isBetaTester = await BetaTester.findOne({
+        id: interaction.user.id,
+      });
+
+      if (!isBetaTester)
+        return interaction.reply({
+          content: "Beta Testers Only.",
+          ephemeral: true,
+        });
+    }
+    // Discord Modals
+    if (interaction.isModalSubmit()) {
+      const commandsPath = path.join(__dirname, "/../commands");
+      const commandFiles = fs
+        .readdirSync(commandsPath)
+        .filter(
+          (file) =>
+            file.endsWith(".js") &&
+            file.replace(".js", "") === interaction.customId
+        );
+      if (commandFiles.length === 0) {
+        console.error(`No modal matching ${interaction.customId} was found.`);
+        return;
+      } else {
+        const filePath = path.join(commandsPath, commandFiles[0]);
+        const command = require(filePath);
+        if ("executeModal" in command) {
+          try {
+            await command.executeModal(interaction);
+          } catch (error) {
+            console.error(`Error executing modal ${interaction.customId}`);
+            console.error(error);
+          }
+        }
+      }
+      return;
+    }
+
     if (!interaction.isChatInputCommand()) return;
 
     const command = interaction.client.commands.get(interaction.commandName);
@@ -68,8 +112,8 @@ module.exports = {
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.error(`Error executing ${interaction.commandName}`);
-      console.error(error);
+      Logger.error(true, interaction, error);
+      console.log(error);
     }
   },
 };

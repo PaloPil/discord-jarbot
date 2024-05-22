@@ -22,8 +22,8 @@
       "EMBED_TITLE": "Chargement...",
       "EMBED_DESCRIPTION": "**Téléchargement de Nitro gratuit...**",
       "EMBED_FOOTER": "Veuillez patienter...",
-      "EMBED_NEW_DESCRIPTION": "**Génération du nitro gratuit...** {loadingMessage}",
-      "EMBED_NEW_TITLE": "**Génération terminé !**",
+      "EMBED_NEW_DESCRIPTION": "**Génération du Nitro gratuit...** {loadingMessage}",
+      "EMBED_NEW_TITLE": "**Génération terminée !**",
       "EMBED_FINISHED": "**Cliquez [ici](https://r.mtdv.me/get-free-nitro) pour activer votre Nitro gratuit !**",
       "EMBED_NEW_FOOTER": "Merci d'avoir attendu."
     },

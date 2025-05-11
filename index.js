@@ -1,3 +1,5 @@
+process.chdir(__dirname);
+
 require("dotenv").config();
 require("proto-tools");
 const {

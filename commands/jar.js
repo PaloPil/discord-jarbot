@@ -7,7 +7,7 @@ module.exports = {
   async execute(interaction) {
     await interaction.reply({
       content: "**Jar.**",
-      files: ["https://i.imgur.com/2fBBkjm.png"],
+      files: ["assets/images/the_jar.png"],
     });
   },
   cooldown: 5,

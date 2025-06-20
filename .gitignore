@@ -134,12 +134,6 @@ dist
 package-lock.json
 pnpm-lock.yaml
 
-# Docker files (Just some tests)
-compose.yaml
-Dockerfile
-README.Docker.md
-.dockerignore
-
 # VSCode
 .vscode/
 .VSCodeCounter

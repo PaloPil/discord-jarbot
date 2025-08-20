@@ -9,13 +9,13 @@
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
     "mongoose": "^8.3.1",
-    "pm2": "^5.3.1",
     "proto-tools": "^1.3.0",
     "sharp": "^0.33.3"
   },
   "scripts": {
-    "start": "pm2-runtime start ecosystem.config.js --env production",
-    "test": "pm2 start ecosystem.config.js --env development",
-    "dev": "nodemon index.js"
+    "start": "node index.js",
+    "prod": "cp .prod.env .env; node index.js; npm run clean",
+    "dev": "cp .dev.env .env; nodemon index.js; npm run clean",
+    "clean": "rm .env"
   }
 }
